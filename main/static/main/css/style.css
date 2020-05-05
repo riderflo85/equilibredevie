@@ -514,18 +514,24 @@
     justify-content: space-between;
 }
 .cart-btn {
-    border: 1px solid #666666;
-    color: #070b21;
+    border: 1px solid #85bd02;
+    border-radius: 12px;
+    background-color: #85bd02;
+    color: #fff;
     display: inline-block;
     font-weight: bold;
     letter-spacing: 0.5px;
     line-height: 1;
     padding: 12px 21px 10px;
     text-transform: uppercase;
+    z-index: 99;
 }
 .cart-btn:hover {
     border: 1px solid #000;
     color: #fff;
+}
+.btn-hover.cart-btn::before {
+    border-radius: 12px;
 }
 .header-cart:hover .cart-dropdown,
 .header-cart-2:hover .cart-dropdown {

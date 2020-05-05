@@ -34,8 +34,8 @@
                     <div class="menu-style-2 handicraft-menu menu-hover">
                         <nav>
                             <ul>
-                                <li><a href="#">home</a>
-                                    <ul class="single-dropdown">
+                                <li><a href="#">accueil</a>
+                                    <!-- <ul class="single-dropdown">
                                         <li><a href="index.html">Fashion</a></li>
                                         <li><a href="index-fashion-2.html">Fashion style 2</a></li>
                                         <li><a href="index-fruits.html">fruits</a></li>
@@ -47,10 +47,10 @@
                                         <li><a href="index-handicraft.html">handicraft</a></li>
                                         <li><a target="_blank" href="index-smart-watch.html">smart watch</a></li>
                                         <li><a href="index-sports.html">sports</a></li>
-                                    </ul>
+                                    </ul> -->
                                 </li>
-                                <li><a href="#">pages</a>
-                                    <ul class="single-dropdown">
+                                <li><a href="#">à propos de nous</a>
+                                    <!-- <ul class="single-dropdown">
                                         <li><a href="about-us.html">about us</a></li>
                                         <li><a href="menu-list.html">menu list</a></li>
                                         <li><a href="login.html">login</a></li>
@@ -59,10 +59,10 @@
                                         <li><a href="checkout.html">checkout</a></li>
                                         <li><a href="wishlist.html">wishlist</a></li>
                                         <li><a href="contact.html">contact</a></li>
-                                    </ul>
+                                    </ul> -->
                                 </li>
-                                <li><a href="shop.html">shop</a>
-                                    <div class="category-menu-dropdown shop-menu">
+                                <li><a href="shop.html">boutique</a>
+                                    <!-- <div class="category-menu-dropdown shop-menu">
                                         <div class="category-dropdown-style category-common2 mb-30">
                                             <h4 class="categories-subtitle"> shop layout</h4>
                                             <ul>
@@ -96,9 +96,9 @@
                                                 <img src="{% static 'main/img/banner/18.jpg' %}" alt="">
                                             </a>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </li>
-                                <li><a href="blog.html">blog</a>
+                                <!-- <li><a href="blog.html">blog</a>
                                     <ul class="single-dropdown">
                                         <li><a href="blog.html">blog 3 colunm</a></li>
                                         <li><a href="blog-2-col.html">blog 2 colunm</a></li>
@@ -106,7 +106,7 @@
                                         <li><a href="blog-details.html">blog details</a></li>
                                         <li><a href="blog-details-sidebar.html">blog details 2</a></li>
                                     </ul>
-                                </li>
+                                </li> -->
                                 <li><a href="contact.html">contact</a></li>
                             </ul>
                         </nav>
@@ -114,12 +114,18 @@
                     <div class="furits-login-cart">
                         <div class="furits-login">
                             <ul>
+                                {% if user.is_authenticated %}
                                 <li>
-                                    <a href="login.html">Login</a>
+                                    <a href="login.html">Déconnexion</a>
+                                </li>
+                                {% else %}
+                                <li>
+                                    <a href="login.html">Connexion</a>
                                 </li>
                                 <li>
-                                    <a href="register.html">Reg</a>
+                                    <a href="register.html">Inscription</a>
                                 </li>
+                                {% endif %}
                             </ul>
                         </div>
                         <div class="header-cart-4 furits-cart">
@@ -176,8 +182,8 @@
                                     </div>
                                 </li>
                                 <li class="cart-btn-wrapper">
-                                    <a class="cart-btn btn-hover" href="#">view cart</a>
-                                    <a class="cart-btn btn-hover" href="#">checkout</a>
+                                    <a class="cart-btn btn-hover" href="#">Consulter</a>
+                                    <a class="cart-btn btn-hover" href="#">Commander</a>
                                 </li>
                             </ul>
                         </div>
@@ -189,7 +195,7 @@
                             <nav id="mobile-menu-active">
                                 <ul class="menu-overflow">
                                     <li><a href="#">HOME</a>
-                                        <ul>
+                                        <!-- <ul>
                                             <li><a href="index.html">Fashion</a></li>
                                             <li><a href="index-fashion-2.html">Fashion style 2</a></li>
                                             <li><a href="index-fruits.html">Fruits</a></li>
@@ -201,10 +207,10 @@
                                             <li><a href="index-handicraft.html">handicraft</a></li>
                                             <li><a href="index-smart-watch.html">smart watch</a></li>
                                             <li><a href="index-sports.html">sports</a></li>
-                                        </ul>
+                                        </ul> -->
                                     </li>
                                     <li><a href="#">pages</a>
-                                        <ul>
+                                        <!-- <ul>
                                             <li><a href="about-us.html">about us</a></li>
                                             <li><a href="menu-list.html">menu list</a></li>
                                             <li><a href="login.html">login</a></li>
@@ -213,10 +219,10 @@
                                             <li><a href="checkout.html">checkout</a></li>
                                             <li><a href="wishlist.html">wishlist</a></li>
                                             <li><a href="contact.html">contact</a></li>
-                                        </ul>
+                                        </ul> -->
                                     </li>
                                     <li><a href="#">shop</a>
-                                        <ul>
+                                        <!-- <ul>
                                             <li><a href="shop-grid-2-col.html"> grid 2 column</a></li>
                                             <li><a href="shop-grid-3-col.html"> grid 3 column</a></li>
                                             <li><a href="shop.html">grid 4 column</a></li>
@@ -233,16 +239,16 @@
                                             <li><a href="product-details-7.html">gallery style 2</a></li>
                                             <li><a href="product-details-8.html">fixed image style</a></li>
                                             <li><a href="product-details-9.html">fixed image style 2</a></li>
-                                        </ul>
+                                        </ul> -->
                                     </li>
                                     <li><a href="#">BLOG</a>
-                                        <ul>
+                                        <!-- <ul>
                                             <li><a href="blog.html">blog 3 colunm</a></li>
                                             <li><a href="blog-2-col.html">blog 2 colunm</a></li>
                                             <li><a href="blog-sidebar.html">blog sidebar</a></li>
                                             <li><a href="blog-details.html">blog details</a></li>
                                             <li><a href="blog-details-sidebar.html">blog details 2</a></li>
-                                        </ul>
+                                        </ul> -->
                                     </li>
                                     <li><a href="contact.html"> Contact  </a></li>
                                 </ul>
