@@ -432,6 +432,9 @@
     display: block;
     position: relative;
 }
+.login-i {
+    color: #578a01 !important;
+}
 .cart-dropdown {
     background: #fff none repeat scroll 0 0;
     border-radius: 10px;

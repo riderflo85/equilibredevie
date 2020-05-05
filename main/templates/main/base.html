@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="{% static 'main/css/bundle.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/responsive.css' %}">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
     <script src=" {% static 'main/js/vendor/modernizr-2.8.3.min.js' %}"></script>
 </head>
 <body>
@@ -120,10 +124,11 @@
                                 </li>
                                 {% else %}
                                 <li>
-                                    <a href="login.html">Connexion</a>
+                                    <a href="login.html" class="login-i"><i class="fas fa-user-circle fa-2x text-dark"></i> Connexion</a>
                                 </li>
                                 <li>
-                                    <a href="register.html">Inscription</a>
+                                    <i class="fab fa-wpforms fa-2x text-dark"></i>
+                                    <a href="register.html" class="login-i"> Inscription</a>
                                 </li>
                                 {% endif %}
                             </ul>
