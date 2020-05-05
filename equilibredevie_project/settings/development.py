@@ -18,6 +18,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'OPTIONS': {
             'init_command': 'SET default_storage_engine=INNODB',
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
         },
         'NAME': os.environ.get('NAME_DB'),
         'USER': os.environ.get('USER_DB'),

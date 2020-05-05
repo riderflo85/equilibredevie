@@ -10,6 +10,7 @@ autopep8 = "*"
 django = "*"
 django-extensions = "*"
 mysqlclient = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.8"
