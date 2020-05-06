@@ -104,3 +104,15 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('shop:product_detail', args=[self.id, self.slug])
+
+
+class Order(models.Model):
+    reference = models.CharField(
+        max_length=50, verbose_name='Référence de la commande'
+    )
+
+
+class ProductQuantity(models.Model):
+    id_product = models.ForeignKey(Product)
+    id_order = models.ForeignKey(Order)
+    quantity = models.IntegerField(null=False, verbose_name='Quantité')
