@@ -32,13 +32,13 @@
                 <div class="header-bottom-wrapper">
                     <div class="logo-2 ptb-35">
                         <a href="index.html">
-                            <img src="{% static 'main/img/logo/logo-10.png' %}" alt="">
+                            <img src="{% static 'main/img/logo/logo1.png' %}" alt="">
                         </a>
                     </div>
                     <div class="menu-style-2 handicraft-menu menu-hover">
                         <nav>
                             <ul>
-                                <li><a href="#">accueil</a>
+                                <li><a href="{% url 'main:index' %}">accueil</a>
                                     <!-- <ul class="single-dropdown">
                                         <li><a href="index.html">Fashion</a></li>
                                         <li><a href="index-fashion-2.html">Fashion style 2</a></li>
@@ -120,11 +120,11 @@
                             <ul>
                                 {% if user.is_authenticated %}
                                 <li>
-                                    <a href="login.html">Déconnexion</a>
+                                    <a href="{% url 'user:logout' %}">Déconnexion</a>
                                 </li>
                                 {% else %}
                                 <li>
-                                    <a href="login.html" class="login-i"><i class="fas fa-user-circle fa-2x text-dark"></i> Connexion</a>
+                                    <a href="{% url 'user:login' %}" class="login-i"><i class="fas fa-user-circle fa-2x text-dark"></i> Connexion</a>
                                 </li>
                                 <li>
                                     <i class="fab fa-wpforms fa-2x text-dark"></i>

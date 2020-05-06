@@ -1,0 +1,51 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="breadcrumb-area pt-205 pb-210" style="background-image: url(/static/main/img/bg/breadcrumb.jpg)">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <h2>Connexion</h2>
+            <ul>
+                <li><a href="{% url 'main:index' %}">accueil</a></li>
+                <li> connexion </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- login-area start -->
+<div class="register-area ptb-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-12 col-lg-6 col-xl-6 ml-auto mr-auto">
+                <div class="login">
+                    <div class="login-form-container">
+                        <div class="login-form">
+                            <form action="." method="post">
+                                {% csrf_token %}
+                                {% if error %}
+                                <h3 class="text-warning">Utilisateur incorrect ou mot de passe invalide</h3>
+                                {% endif %}
+                                {{ form.email_or_id }}
+                                {% comment %} <input type="text" name="user-name" placeholder="Username"> {% endcomment %}
+                                {{ form.password }}
+                                {% comment %} <input type="password" name="user-password" placeholder="Password"> {% endcomment %}
+                                <div class="button-box">
+                                    <div class="login-toggle-btn">
+                                        <input type="checkbox">
+                                        <label>Se souvenir de moi</label>
+                                        <a href="#">Mot de passe oublié ?</a>
+                                    </div>
+                                    <button type="submit" class="default-btn floatright">S'identifier</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
