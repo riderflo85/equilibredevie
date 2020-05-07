@@ -120,11 +120,11 @@
                             <ul>
                                 {% if user.is_authenticated %}
                                 <li>
-                                    <a href="{% url 'user:logout' %}">Déconnexion</a>
+                                    <a href="{% url 'useraccount:logout' %}">Déconnexion</a>
                                 </li>
                                 {% else %}
                                 <li>
-                                    <a href="{% url 'user:login' %}" class="login-i"><i class="fas fa-user-circle fa-2x text-dark"></i> Connexion</a>
+                                    <a href="{% url 'useraccount:login' %}" class="login-i"><i class="fas fa-user-circle fa-2x text-dark"></i> Connexion</a>
                                 </li>
                                 <li>
                                     <i class="fab fa-wpforms fa-2x text-dark"></i>

@@ -113,6 +113,6 @@ class Order(models.Model):
 
 
 class ProductQuantity(models.Model):
-    id_product = models.ForeignKey(Product)
-    id_order = models.ForeignKey(Order)
+    id_product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    id_order = models.ForeignKey(Order, on_delete=models.CASCADE)
     quantity = models.IntegerField(null=False, verbose_name='Quantité')

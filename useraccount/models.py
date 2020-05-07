@@ -11,22 +11,20 @@ class User(AbstractUser):
         unique=True
     )
     phone_number = models.IntegerField(
-        max_length=10,
         null=False,
         verbose_name='Numéro de téléphone'
     )
     adress = models.CharField(
-        max_lentgh=350,
+        max_length=350,
         null=False,
         verbose_name='Adresse'
     )
     postal_code = models.IntegerField(
-        max_length=5,
         null=False,
         verbose_name='Code postale'
     )
     city = models.CharField(
-        max_lentgh=250,
+        max_length=250,
         null=False,
         verbose_name='Ville'
     )
