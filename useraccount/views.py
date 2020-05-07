@@ -1,7 +1,7 @@
 # from django.contrib.auth.decorators import 
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-from .forms import LoginForm
+from .forms import LoginForm, RegisterForm
 
 
 def login_user(request):
@@ -14,7 +14,7 @@ def login_user(request):
             pwd = form.cleaned_data['password']
 
             user = authenticate(request, email=email, username=username, password=pwd)
-        
+
             if user is not None:
                 login(request, user)
                 return redirect('main:index')
@@ -28,4 +28,11 @@ def login_user(request):
     
     context['form'] = form
 
-    return render(request, 'user/login.html', context)
+    return render(request, 'useraccount/login.html', context)
+
+def register(request):
+    context = {}
+
+    context['form'] = RegisterForm()
+
+    return render(request, 'useraccount/register.html', context)

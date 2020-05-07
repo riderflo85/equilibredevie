@@ -1,6 +1,7 @@
 
 from django.contrib.auth.forms import AuthenticationForm
 from django import forms
+from .models import User
 
 
 # class LoginForm(AuthenticationForm):
@@ -36,3 +37,20 @@ class LoginForm(forms.Form):
             attrs={'placeholder': 'Mot de passe'}
         ),
     )
+
+
+class RegisterForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'first_name',
+            'last_name',
+            'username',
+            'email',
+            'password',
+            'phone_number',
+            'adress',
+            'postal_code',
+            'city',
+        ]
+        exclude = ['order']
