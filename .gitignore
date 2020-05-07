@@ -3,7 +3,7 @@
 equilibredevie_project/media
 main/migrations/00*
 shop/migrations/00*
-user/migrations/00*
+useraccount/migrations/00*
 product/migrations/00*
 payment/migrations/00*
 cart/migrations/00*
