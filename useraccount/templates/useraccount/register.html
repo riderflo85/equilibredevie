@@ -1,4 +1,50 @@
 {% extends 'main/base.html' %}
 {% block content %}
-
+<div class="breadcrumb-area pt-205 pb-210" style="background-image: url(/static/main/img/bg/breadcrumb.jpg)">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <h2>inscription</h2>
+            <ul>
+                <li><a href="#">accueil</a></li>
+                <li> inscription </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- register-area start -->
+<div class="register-area ptb-100">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-12 col-lg-12 col-xl-6 ml-auto mr-auto">
+                <div class="login">
+                    <div class="login-form-container">
+                        <div class="login-form">
+                            {% if error %}
+                            <h3 class="text-warning">Merci de vérifier le formulaire !</h3>
+                            {% endif %}
+                            <form action="." method="post">
+                                {% csrf_token %}
+                                {{ form.first_name }}
+                                {{ form.last_name }}
+                                {{ form.username }}
+                                {{ form.email }}
+                                {{ form.password }}
+                                {{ form.phone_number }}
+                                {{ form.adress }}
+                                {{ form.postal_code }}
+                                {{ form.city }}
+                                {% comment %} <input type="text" name="user-name" placeholder="Username">
+                                <input type="password" name="user-password" placeholder="Password">
+                                <input name="user-email" placeholder="Email" type="email"> {% endcomment %}
+                                <div class="button-box">
+                                    <button type="submit" class="default-btn floatright">S'inscrire</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}
