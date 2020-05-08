@@ -1,25 +1,6 @@
-
-from django.contrib.auth.forms import AuthenticationForm
 from django import forms
 from .models import User
 
-
-# class LoginForm(AuthenticationForm):
-#     """ Login form """
-
-#     email = forms.CharField(
-#         label='user',
-#         max_length=100,
-#         widget=forms.EmailInput(
-#             attrs={'placeholder': 'Adresse email'}
-#         ),
-#     )
-#     password = forms.CharField(
-#         label='password',
-#         widget=forms.PasswordInput(
-#             attrs={'placeholder': 'Mot de passe'}
-#         ),
-#     )
 
 class LoginForm(forms.Form):
     """ Login form """
@@ -40,14 +21,24 @@ class LoginForm(forms.Form):
 
 
 class RegisterForm(forms.ModelForm):
+    confirm_password = forms.CharField(
+        label='Confirmer votre mot de passe',
+        max_length=128,
+        min_length=8,
+        required=True,
+        widget=forms.PasswordInput(),
+    )
+
     class Meta:
         model = User
         fields = [
-            'first_name',
+            'civility',
             'last_name',
+            'first_name',
             'username',
             'email',
             'password',
+            'confirm_password',
             'phone_number',
             'adress',
             'postal_code',

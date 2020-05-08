@@ -4,11 +4,22 @@ from django.utils.translation import gettext_lazy as _
 from shop.models import Order
 
 
+USER_CIVILITY = [
+    ('Mr', 'Monsieur'),
+    ('Mme', 'Madame')
+]
+
 class User(AbstractUser):
     email = models.EmailField(
         _('adresse email'),
         null=False,
         unique=True
+    )
+    civility = models.CharField(
+        max_length=8,
+        null=False,
+        choices=USER_CIVILITY,
+        verbose_name='Civilité'
     )
     phone_number = models.IntegerField(
         null=False,
@@ -35,4 +46,4 @@ class User(AbstractUser):
     order = models.ManyToManyField(Order)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.civility} {self.last_name} {self.first_name}"

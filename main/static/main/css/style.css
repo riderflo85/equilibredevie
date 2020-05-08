@@ -6547,8 +6547,10 @@ a.icon-cart-furniture.food-cart span {
 }
 /*--------- 13. Login page ---------*/
 .login-form-container {
-    background: transparent none repeat scroll 0 0;
+    /* background: transparent none repeat scroll 0 0; */
+    background-color: rgba(0, 162, 232, 0.2);
     border: 1px solid #ddd;
+    border-radius: 40px;
     padding: 60px 40px;
     text-align: left;
 }
@@ -6597,6 +6599,22 @@ a.icon-cart-furniture.food-cart span {
     font-size: 15px;
     font-weight: 400;
 }
+.is-valid {
+    border: 2.5px solid #28a745 !important;
+    padding-right: calc(1.5em + .75rem) !important;
+    background-image: url("/static/main/img/icon-form/check-solid-green.svg") !important;
+    background-repeat: no-repeat !important;
+    background-position: center right calc(.375em + .1875rem) !important;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem) !important;
+}
+.is-invalid {
+    border: 2.5px solid #dc3545 !important;
+    padding-right: calc(1.5em + .75rem) !important;
+    background-image: url("/static/main/img/icon-form/times-solid.svg") !important;
+    background-repeat: no-repeat !important;
+    background-position: center right calc(.375em + .1875rem) !important;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem) !important;
+}
 .login-toggle-btn > a {
     color: #777;
     float: right;
@@ -6605,7 +6623,7 @@ a.icon-cart-furniture.food-cart span {
 .login-toggle-btn > a:hover {
     color: #000;
 }
-.button-box .default-btn {
+/* .button-box .default-btn {
     background: transparent none repeat scroll 0 0;
     border: 1px solid #ddd;
     color: #777;
@@ -6616,12 +6634,15 @@ a.icon-cart-furniture.food-cart span {
     text-transform: uppercase;
     transition: all 0.3s ease 0s;
     border-radius: 50px;
+} */
+.button-box .furits-slider-btn {
+    border: none;
 }
-.button-box .default-btn:hover {
+/* .button-box .default-btn:hover {
     background-color: #050035;
     border: 1px solid #050035;
     color: #fff;
-}
+} */
 /*-------- 14. Shopping cart ----------*/
 h1.cart-heading {
     color: #252525;

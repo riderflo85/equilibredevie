@@ -277,7 +277,7 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="footer-widget">
                             <div class="food-about">
-                                <a href="#"><img src="assets/img/logo/logo-11.png" alt=""></a>
+                                <a href="{% url 'main:index' %}"><img src="{% static 'main/img/logo/logo1.png' %}" alt=""></a>
                                 <p>Boutique en ligne</p>
                                 <div class="food-about-info">
                                     <p>Nous sommes à votre disposition afin de répondre à toute vos questions.</p>
@@ -359,10 +359,6 @@
         </div>
     </footer>
 
-
-    {% block script %}
-    {% endblock script %}
-
     <!-- all js here -->
     <script src="{% static 'main/js/vendor/jquery-1.12.0.min.js' %}"></script>
     <script src="{% static 'main/js/popper.js' %}"></script>
@@ -376,5 +372,9 @@
     <script src="{% static 'main/js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'main/js/plugins.js' %}"></script>
     <script src="{% static 'main/js/main.js' %}"></script>
+
+    {% block script %}
+    {% endblock script %}
+
 </body>
 </html>

@@ -9,6 +9,7 @@ class FormTestCase(TestCase):
             'TestPseudoNoReplica',
             'supertester@tester.com',
             'testUserPassword!',
+            civility='Mr',
             first_name='TestFirstName',
             last_name='TestLastName',
             phone_number=1723456789,
@@ -20,11 +21,13 @@ class FormTestCase(TestCase):
 
     def test_form_register(self):
         data = {
+            'civility': 'Mr',
             'first_name': 'TestFirstName',
             'last_name': 'TestLastName',
             'username': 'TestPseudo',
             'email': 'test@tester.com',
             'password': 'testUserPassword!',
+            'confirm_password': 'testUserPassword',
             'phone_number': 1723456789,
             'adress': '134 Rue De Paris',
             'postal_code': 75000,
@@ -39,6 +42,7 @@ class FormTestCase(TestCase):
             form.cleaned_data['password'],
             first_name=form.cleaned_data['first_name'],
             last_name=form.cleaned_data['last_name'],
+            civility=form.cleaned_data['civility'],
             phone_number=form.cleaned_data['phone_number'],
             adress=form.cleaned_data['adress'],
             postal_code=form.cleaned_data['postal_code'],
@@ -65,6 +69,7 @@ class UserActionTestCase(TestCase):
             'TestPseudoNoReplica',
             'supertester@tester.com',
             'testUserPassword!',
+            civility='Mr',
             first_name='TestFirstName',
             last_name='TestLastName',
             phone_number=1723456789,

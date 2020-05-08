@@ -1,11 +1,12 @@
 {% extends 'main/base.html' %}
+{% load static %}
 {% block content %}
 <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(/static/main/img/bg/breadcrumb.jpg)">
     <div class="container">
         <div class="breadcrumb-content text-center">
             <h2>inscription</h2>
             <ul>
-                <li><a href="#">accueil</a></li>
+                <li><a href="{% url 'main:index' %}">accueil</a></li>
                 <li> inscription </li>
             </ul>
         </div>
@@ -24,20 +25,13 @@
                             {% endif %}
                             <form action="." method="post">
                                 {% csrf_token %}
-                                {{ form.first_name }}
-                                {{ form.last_name }}
-                                {{ form.username }}
-                                {{ form.email }}
-                                {{ form.password }}
-                                {{ form.phone_number }}
-                                {{ form.adress }}
-                                {{ form.postal_code }}
-                                {{ form.city }}
-                                {% comment %} <input type="text" name="user-name" placeholder="Username">
-                                <input type="password" name="user-password" placeholder="Password">
-                                <input name="user-email" placeholder="Email" type="email"> {% endcomment %}
+                                {{ form }}
+                                <div class="d-flex mb-3">
+                                    <input type="checkbox" class="mr-2" required>
+                                    <label>J'accepte les conditions générales et la politique de confidentialité</label>
+                                </div>
                                 <div class="button-box">
-                                    <button type="submit" class="default-btn floatright">S'inscrire</button>
+                                    <button type="submit" class="furits-slider-btn btn-hover animated floatright">S'inscrire</button>
                                 </div>
                             </form>
                         </div>
@@ -48,3 +42,6 @@
     </div>
 </div>
 {% endblock content %}
+{% block script %}
+<script src="{% static 'useraccount/js/registerform.js' %}"></script>
+{% endblock script %}
