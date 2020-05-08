@@ -6572,7 +6572,7 @@ a.icon-cart-furniture.food-cart span {
     border: 1px solid #ddd;
     border-radius: 3px;
     box-shadow: none;
-    color: #999;
+    /* color: #999; */
     font-size: 14px;
     height: 40px;
     margin-bottom: 20px;
@@ -6581,7 +6581,7 @@ a.icon-cart-furniture.food-cart span {
     width: 100%;
 }
 .login-form-container input::-moz-placeholder {
-    color: #999;
+    /* color: #999; */
     opacity: 1;
 }
 .login-toggle-btn {
@@ -8661,11 +8661,11 @@ a.bundle-btn {
     background-color: #969696;
     content: "";
     font-size: 8px;
-    height: 12px;
+    height: 20px;
     position: absolute;
     right: -12px;
     top: 4px;
-    width: 1px;
+    width: 2px;
 }
 .furits-login li:last-child::after {
     content: none;
