@@ -1,0 +1,93 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="breadcrumb-area pt-205 pb-210" style="background-image: url(/static/main/img/bg/breadcrumb.jpg)">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <h2>cart page</h2>
+            <ul>
+                <li><a href="#">home</a></li>
+                <li> cart page</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- shopping-cart-area start -->
+<div class="cart-main-area pt-95 pb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h1 class="cart-heading">Panier</h1>
+                <form action="#">
+                    <div class="table-content table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>supprimer</th>
+                                    <th>image</th>
+                                    <th>produit</th>
+                                    <th>prix ttc</th>
+                                    <th>quantité</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cart %}
+                                <tr>
+                                    <td class="product-remove">
+                                        <a href="{% url "cart:cart_remove" product.id  %}"><i class="fas fa-times fa-2x remove-cart-item"></i></a>
+                                    </td>
+                                    <td class="product-thumbnail">
+                                        <a href="{{ item.product.get_absolute_url }}"><img src="{{ item.product.image.url }}" alt="product image"></a>
+                                    </td>
+                                    <td class="product-name">
+                                        <a href="{{ item.product.get_absolute_url }}">{{ item.product }}</a>
+                                    </td>
+                                    <td class="product-price-cart">
+                                        <span class="amount">{{ item.price }} €</span>
+                                    </td>
+                                    <td class="product-quantity">
+                                        <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                            {% csrf_token %}
+                                            {{ item.update_quantity_form.quantity }}
+                                            {{ item.update_quantity_form.update }}
+                                            <input type="submit" class="btn btn-success" value="Mettre à jour">
+                                        </form>
+                                    </td>
+                                    <td class="product-subtotal">{{ item.total_price }} €</td>
+                                </tr>
+                                {% empty %}
+                                <div class="container mb-5">
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <h3>Votre panier est vide.</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 ml-auto">
+                            <div class="cart-page-total">
+                                <h2>Total de la commande</h2>
+                                <ul>
+                                    <li>Total<span>{{ cart.get_total_price }} €</span></li>
+                                </ul>
+                                <a href="#">Valider la commande</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block script %}
+{% endblock script %}

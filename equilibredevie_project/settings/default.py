@@ -61,6 +61,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -88,6 +89,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CART_SESSION_ID = 'cart'
 
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
@@ -112,7 +114,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-LOGIN_URL = 'user/'
+LOGIN_URL = '/user/login/'
 
 LOGIN_REDIRECT_URL = '/'
 
