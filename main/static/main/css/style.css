@@ -842,8 +842,9 @@
     text-align: center;
     transition: all 0.3s ease 0s;
 }
-.product-action a {
+.product-action button {
     background-color: #3751c8;
+    border: 0;
     border-radius: 100%;
     color: #f7f7f7;
     display: inline-block;
@@ -853,9 +854,11 @@
     margin: 0 15px;
     width: 45px;
 }
-.product-action a:hover {
+.product-action button:hover {
     background-color: #00a2e8;
     color: #fff;
+    cursor: pointer;
+    
 }
 .product-img > span {
     background-color: #666;
@@ -887,25 +890,25 @@
 .product-content {
     padding-top: 23px;
 }
-.product-action > a.animate-left {
+.product-action > button.animate-left {
     transform: translateX(-20px);
     transition: all 0.4s ease 0s;
 }
-.product-wrapper:hover .product-action > a.animate-left {
+.product-wrapper:hover .product-action > button.animate-left {
     transform: translateX(0px);
 }
-.product-action > a.animate-right {
+.product-action > button.animate-right {
     transform: translateX(20px);
     transition: all 0.4s ease 0s;
 }
-.product-wrapper:hover .product-action > a.animate-right {
+.product-wrapper:hover .product-action > button.animate-right {
     transform: translateX(0px);
 }
-.product-action > a.animate-top {
+.product-action > button.animate-top {
     transform: translateY(20px);
     transition: all 0.4s ease 0s;
 }
-.product-wrapper:hover .product-action > a.animate-top {
+.product-wrapper:hover .product-action > button.animate-top {
     transform: translateY(0px);
 }
 .product-wrapper:hover .product-action {
@@ -7498,8 +7501,9 @@ h5.panel-title {
     text-align: center;
     transition: all 0.3s ease 0s;
 }
-.product-action-list-style a {
+.product-action-list-style button {
     background-color: #3751c8;
+    border: 0;
     border-radius: 100%;
     color: #f7f7f7;
     display: inline-block;
@@ -7509,9 +7513,10 @@ h5.panel-title {
     margin: 0 15px;
     width: 45px;
 }
-.product-action-list-style a:hover {
+.product-action-list-style button:hover {
     background-color: #00a2e8;
     color: #fff;
+    cursor: pointer;
 }
 .product-wrapper:hover .product-action-list-style {
     opacity: 1;
@@ -7524,7 +7529,7 @@ h5.panel-title {
 .breadcrumb-padding .container-fluid {
     padding: 0 100px;
 }
-.product-box-style .product-action a {
+.product-box-style .product-action button {
     margin: 0 7px;
 }
 /*--------- 17. Product details ------------*/
@@ -8751,6 +8756,24 @@ a.bundle-btn {
   left: 17%;
 }
 .btn-hover.furits-slider-btn::before {
+    border-radius: 50px;
+}
+.btn-add-cart-1 {
+    background-color: #85bd02;
+    border-radius: 50px;
+    color: #fffffe;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    padding: 16px 30px 16px;
+    text-transform: uppercase;
+    z-index: 99;
+}
+.btn-add-cart-1:hover {
+    color: #fff;
+}
+.btn-hover.btn-add-cart-1::before {
     border-radius: 50px;
 }
 .slider-active-2.owl-carousel .owl-nav div {

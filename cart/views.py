@@ -36,5 +36,4 @@ def add_product_in_cart(request, product_id):
             quantity=cd['quantity'],
             update_quantity=cd['update']
         )
-
-    return redirect('cart:cart_detail')
+    return redirect('shop:shop')

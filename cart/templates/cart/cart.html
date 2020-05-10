@@ -37,10 +37,10 @@
                                 {% for item in cart %}
                                 <tr>
                                     <td class="product-remove">
-                                        <a href="{% url "cart:cart_remove" product.id  %}"><i class="fas fa-times fa-2x remove-cart-item"></i></a>
+                                        <a href="{% url "cart:cart_remove" item.product.id  %}"><i class="fas fa-times fa-2x remove-cart-item"></i></a>
                                     </td>
                                     <td class="product-thumbnail">
-                                        <a href="{{ item.product.get_absolute_url }}"><img src="{{ item.product.image.url }}" alt="product image"></a>
+                                        <a href="{{ item.product.get_absolute_url }}"><img src="{{ item.product.image_cart.url }}" alt="product image"></a>
                                     </td>
                                     <td class="product-name">
                                         <a href="{{ item.product.get_absolute_url }}">{{ item.product }}</a>
@@ -49,7 +49,7 @@
                                         <span class="amount">{{ item.price }} €</span>
                                     </td>
                                     <td class="product-quantity">
-                                        <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                        <form action="{% url "cart:cart_add" item.product.id %}" method="post">
                                             {% csrf_token %}
                                             {{ item.update_quantity_form.quantity }}
                                             {{ item.update_quantity_form.update }}
