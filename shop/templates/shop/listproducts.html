@@ -6,10 +6,10 @@
 <div class="breadcrumb-area pt-205 breadcrumb-padding pb-210" style="background-image: url(/static/main/img/bg/breadcrumb.jpg)">
     <div class="container-fluid">
         <div class="breadcrumb-content text-center">
-            <h2>shop grid 3 column</h2>
+            <h2>boutique</h2>
             <ul>
-                <li><a href="#">home</a></li>
-                <li>shop grid 3 column</li>
+                <li><a href="{% url 'main:index' %}">accueil</a></li>
+                <li>boutique</li>
             </ul>
         </div>
     </div>
@@ -89,7 +89,8 @@
                                                         <button type="submit" class="animate-top" title="Ajouter au panier">
                                                             <i class="pe-7s-cart"></i>
                                                         </button>
-                                                        <button type="button" class="animate-right" title="Prévisualiser" data-toggle="modal" data-target="#exampleModal">                                                            <i class="pe-7s-look"></i>
+                                                        <button type="button" class="animate-right" title="Prévisualiser" data-toggle="modal" data-target="#modalProduct{{ product.id }}">
+                                                            <i class="pe-7s-look"></i>
                                                         </button>
                                                     </div>
                                                 </form>
@@ -115,7 +116,7 @@
                                                     <img src="{{ product.image_shop.url }}" alt="">
                                                 </a>
                                                 <div class="product-action-list-style">
-                                                    <button class="animate-right" type="submit" title="Prévisualisation" data-toggle="modal" data-target="#exampleModal">
+                                                    <button class="animate-right" type="submit" title="Prévisualisation" data-toggle="modal" data-target="#modalProduct{{ product.id }}">
                                                         <i class="pe-7s-look"></i>
                                                     </button>
                                                 </div>
@@ -161,9 +162,9 @@
     </div>
 </div>
 
-
+{% for product in object_list %}
 <!-- modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modalProduct{{ product.id }}" tabindex="-1" role="dialog" aria-hidden="true">
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span class="pe-7s-close" aria-hidden="true"></span>
     </button>
@@ -198,25 +199,12 @@
                 </div>
                 <div class="qwick-view-right">
                     <div class="qwick-view-content">
-                        <h3>Handcrafted Supper Mug</h3>
+                        <h3>{{ product.name }}</h3>
                         <div class="price">
-                            <span class="new">$90.00</span>
-                            <span class="old">$120.00  </span>
+                            <span class="new">{{ product.price }}€</span>
                         </div>
-                        <div class="rating-number">
-                            <div class="quick-view-rating">
-                                <i class="pe-7s-star"></i>
-                                <i class="pe-7s-star"></i>
-                                <i class="pe-7s-star"></i>
-                                <i class="pe-7s-star"></i>
-                                <i class="pe-7s-star"></i>
-                            </div>
-                            <div class="quick-view-number">
-                                <span>2 Ratting (S)</span>
-                            </div>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do tempor incididun ut labore et dolore magna aliqua. Ut enim ad mi , quis nostrud veniam exercitation .</p>
-                        <div class="quick-view-select">
+                        <p>{{ product.description }}</p>
+                        {% comment %} <div class="quick-view-select">
                             <div class="select-option-part">
                                 <label>Size*</label>
                                 <select class="select">
@@ -234,16 +222,14 @@
                                     <option value="">yellow</option>
                                 </select>
                             </div>
-                        </div>
+                        </div> {% endcomment %}
                         <div class="quickview-plus-minus">
-                            <div class="cart-plus-minus">
-                                <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-                            </div>
                             <div class="quickview-btn-cart">
-                                <a class="btn-hover-black" href="#">add to cart</a>
-                            </div>
-                            <div class="quickview-btn-wishlist">
-                                <a class="btn-hover" href="#"><i class="pe-7s-like"></i></a>
+                                <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                    {% csrf_token %}
+                                    {{ cart_product_form.quantity }}
+                                    <button class="btn-hover list-btn-style btn-add-cart-1" type="submit">Ajouter au panier</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -252,6 +238,7 @@
         </div>
     </div>
 </div>
+{% endfor %}
 
 {% endblock content %}
 
