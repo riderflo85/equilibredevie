@@ -37,7 +37,7 @@
                                 {% for item in cart %}
                                 <tr>
                                     <td class="product-remove">
-                                        <a href="{% url "cart:cart_remove" item.product.id  %}"><i class="fas fa-times fa-2x remove-cart-item"></i></a>
+                                        <a href="{% url "cart:cart_remove" item.product.id  %}"><i class="fas fa-times fa-2x"></i></a>
                                     </td>
                                     <td class="product-thumbnail">
                                         <a href="{{ item.product.get_absolute_url }}"><img src="{{ item.product.image_cart.url }}" alt="product image"></a>
@@ -48,13 +48,9 @@
                                     <td class="product-price-cart">
                                         <span class="amount">{{ item.price }} €</span>
                                     </td>
-                                    <td class="product-quantity">
-                                        <form action="{% url "cart:cart_add" item.product.id %}" method="post">
-                                            {% csrf_token %}
-                                            {{ item.update_quantity_form.quantity }}
-                                            {{ item.update_quantity_form.update }}
-                                            <input type="submit" class="btn btn-success" value="Mettre à jour">
-                                        </form>
+                                    <td class="product-quantity block-form-update" data-id-product="{{ item.product.id }}">
+                                        {{ item.update_quantity_form.quantity }}
+                                        {{ item.update_quantity_form.update }}
                                     </td>
                                     <td class="product-subtotal">{{ item.total_price }} €</td>
                                 </tr>
@@ -71,13 +67,25 @@
                         </table>
                     </div>
                     <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="coupon-all">
+                                <div class="coupon">
+                                    <a class="button" href="{% url 'shop:shop' %}">Continuer mes achats</a>
+                                </div>
+                                <div class="coupon2">
+                                    <input class="button" name="updated_cart" id="btnUpdateCart" value="Mettre à jour le panier" type="submit">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-5 ml-auto">
                             <div class="cart-page-total">
                                 <h2>Total de la commande</h2>
                                 <ul>
                                     <li>Total<span>{{ cart.get_total_price }} €</span></li>
                                 </ul>
-                                <a href="#">Valider la commande</a>
+                                <a href="#" class="valid-cart">Valider la commande</a>
                             </div>
                         </div>
                     </div>
@@ -90,4 +98,6 @@
 {% endblock content %}
 
 {% block script %}
+<script src="{% static 'cart/js/secureajax.js' %}"></script>
+<script src="{% static 'cart/js/updatecart.js' %}"></script>
 {% endblock script %}

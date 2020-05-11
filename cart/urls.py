@@ -11,4 +11,5 @@ urlpatterns = [
         views.remove_product_in_cart,
         name="cart_remove"
     ),
+    path('update/', views.update_cart, name="cart_update"),
 ]

@@ -56,6 +56,23 @@ class Cart(object):
             self.cart[product_id]['quantity'] += quantity
         self.save()
 
+    def update(self, products_and_quantity):
+        """
+        Update the quantity of the product in the cart.
+        """
+        try:
+            for i in products_and_quantity:
+                data_cleaned = i.split(',')
+                id_product = data_cleaned[0]
+                quantity_product = data_cleaned[1]
+
+                self.cart[id_product]['quantity'] = int(quantity_product)
+
+            self.save()
+            return True
+        except:
+            return False
+
     def save(self):
         # mark the session as "modified" to make sure it gets saved
         self.session.modified = True

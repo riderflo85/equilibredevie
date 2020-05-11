@@ -533,9 +533,6 @@
     border: 1px solid #000;
     color: #fff;
 }
-.remove-cart-item {
-    color: #ce1115;
-}
 .btn-hover.cart-btn::before {
     border-radius: 12px;
 }
@@ -6729,7 +6726,7 @@ h1.cart-heading {
     width: 130px;
 }
 .table-content table td.product-remove i {
-    color: #919191;
+    color: #f7a1a2;
     display: inline-block;
     font-size: 35px;
     height: 40px;
@@ -6742,7 +6739,7 @@ h1.cart-heading {
     font-size: 15px;
 }
 .table-content table td.product-remove i:hover {
-    color: #050035;
+    color: #ce1115;
 }
 .table-content table td.product-quantity {
     width: 180px;
@@ -6754,7 +6751,7 @@ h1.cart-heading {
     width: 130px;
 }
 thead {
-    background-color: #f6f6f6;
+    background-color: rgba(0, 162, 232, 0.2);
 }
 .coupon input {
     background-color: transparent;
@@ -6767,11 +6764,11 @@ thead {
 .coupon2 input {
     width: inherit;
 }
-.coupon-all input.button {
-    background-color: #333;
+.valid-cart, .coupon-all input.button, a.button {
+    background-color: #578a01;
     border: 0 none;
-    border-radius: 2px;
-    color: #fff;
+    border-radius: 10px;
+    color: #fffffe;
     display: inline-block;
     font-size: 13px;
     font-weight: 700;
@@ -6783,7 +6780,10 @@ thead {
     transition: all 0.3s ease-in-out 0s;
     width: inherit;
 }
-.coupon-all input.button:hover {
+.valid-cart {
+    margin-top: 30px;
+}
+.valid-cart:hover, .coupon-all input.button:hover, a.button:hover {
     background-color: #050035;
     border: medium none;
     color: #fff;
@@ -6815,21 +6815,6 @@ thead {
 }
 .cart-page-total {
     padding-top: 50px;
-}
-.cart-page-total > a {
-    background-color: #333;
-    border: 1px solid #333;
-    color: #fff;
-    display: inline-block;
-    margin-top: 30px;
-    padding: 9px 20px;
-    text-transform: capitalize;
-    transition: all 0.3s ease 0s;
-}
-.cart-page-total > a:hover {
-    background-color: #050035;
-    color: #fff;
-    border: 1px solid #050035;
 }
 .cart-page-total > h2 {
     font-size: 25px;

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from shop.models import Product
 from .cart import Cart
@@ -21,7 +22,7 @@ def remove_product_in_cart(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     cart.remove(product)
-    return redirect('cart:cart_detail')
+    return redirect('cart:cart')
 
 @require_POST
 def add_product_in_cart(request, product_id):
@@ -37,3 +38,18 @@ def add_product_in_cart(request, product_id):
             update_quantity=cd['update']
         )
     return redirect('shop:shop')
+
+@require_POST
+def update_cart(request):
+    print(request.POST['data'])
+
+    data = request.POST['data'].split('|')
+    data.pop(-1)
+    
+    cart = Cart(request)
+
+    if cart.update(data):
+        return JsonResponse({'success': True})
+
+    else:
+        return JsonResponse({'success': False})

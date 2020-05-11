@@ -85,13 +85,11 @@
                             <a class="icon-cart" href="{% url 'cart:cart' %}">
                                 <i class="pe-7s-shopbag"></i>
                                 <span class="handicraft-count">
-                                    {% with total_items as cart|length %}
-                                        {% if total_items > 0 %}
-                                            {{ total_items }}
-                                        {% else %}
-                                            0
-                                        {% endif %}
-                                    {% endwith %}
+                                    {% if cart|length < 0%}
+                                        0
+                                    {% else %}
+                                        {{ cart|length }}
+                                    {% endif %}
                                 </span>
                             </a>
                             <ul class="cart-dropdown">
