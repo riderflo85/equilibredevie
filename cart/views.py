@@ -24,6 +24,12 @@ def remove_product_in_cart(request, product_id):
     cart.remove(product)
     return redirect('cart:cart')
 
+def remove_product_in_mini_cart(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    cart.remove(product)
+    return JsonResponse({'success': True})
+
 @require_POST
 def add_product_in_cart(request, product_id):
     cart = Cart(request)

@@ -85,7 +85,9 @@
                                 <ul>
                                     <li>Total<span>{{ cart.get_total_price }} €</span></li>
                                 </ul>
+                                {% if cart|length > 0 %}
                                 <a href="#" class="valid-cart">Valider la commande</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -98,6 +100,5 @@
 {% endblock content %}
 
 {% block script %}
-<script src="{% static 'cart/js/secureajax.js' %}"></script>
 <script src="{% static 'cart/js/updatecart.js' %}"></script>
 {% endblock script %}

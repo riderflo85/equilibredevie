@@ -481,15 +481,18 @@
 .cart-title h6 a {
     color: #070b21;
 }
-.cart-delete > a {
-    color: #070b21;
+.cart-delete > span {
+    color: #f15b5d;
     font-size: 18px;
-    margin-top: 18px;
+    margin-top: 25px;
 }
-.cart-delete > a:hover,
+.cart-delete > span:hover {
+    color: #ce1115;
+    cursor: pointer;
+}
 .cart-title h5 a:hover,
 .cart-title h6 a:hover {
-    color: #050035;
+    color: #3751c8;
 }
 .cart-title > span {
     display: block;
@@ -517,7 +520,7 @@
     justify-content: space-between;
 }
 .cart-btn {
-    border: 1px solid #85bd02;
+    border: 0;
     border-radius: 12px;
     background-color: #85bd02;
     color: #fff;
@@ -530,7 +533,6 @@
     z-index: 99;
 }
 .cart-btn:hover {
-    border: 1px solid #000;
     color: #fff;
 }
 .btn-hover.cart-btn::before {

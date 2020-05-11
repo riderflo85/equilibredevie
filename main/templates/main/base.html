@@ -84,7 +84,7 @@
                         <div class="header-cart-4 furits-cart">
                             <a class="icon-cart" href="{% url 'cart:cart' %}">
                                 <i class="pe-7s-shopbag"></i>
-                                <span class="handicraft-count">
+                                <span class="handicraft-count" id="countItemsCart">
                                     {% if cart|length < 0%}
                                         0
                                     {% else %}
@@ -92,57 +92,31 @@
                                     {% endif %}
                                 </span>
                             </a>
-                            <ul class="cart-dropdown">
-                                <li class="single-product-cart">
+                            <ul class="cart-dropdown" id="contentCart">
+                                {% for item in cart %}
+                                <li class="single-product-cart" id="product{{ item.product.id }}">
                                     <div class="cart-img">
-                                        <a href="#"><img src="{% static 'main/img/cart/1.jpg' %}" alt=""></a>
+                                        <a href="{{ item.product.get_absolute_url }}"><img src="{{ item.product.image_cart.url }}" alt="product image"></a>
                                     </div>
                                     <div class="cart-title">
-                                        <h5><a href="#"> Bits Headphone</a></h5>
-                                        <h6><a href="#">Black</a></h6>
-                                        <span>$80.00 x 1</span>
+                                        <h5><a href="{{ item.product.get_absolute_url }}">{{ item.product }}</a></h5>
+                                        <h6><span>{{ item.price }}€ x {{ item.quantity }}</span></h6>
+                                        <span>Total: <span class="ml-4">{{ item.total_price }}€</span></span>
                                     </div>
-                                    <div class="cart-delete">
-                                        <a href="#"><i class="ti-trash"></i></a>
+                                    <div class="cart-delete" data-id-product="{{ item.product.id }}" data-quantity="{{ item.quantity }}">
+                                        <span><i class="far fa-trash-alt"></i></span>
                                     </div>
                                 </li>
+                                {% empty %}
                                 <li class="single-product-cart">
-                                    <div class="cart-img">
-                                        <a href="#"><img src="{% static 'main/img/cart/2.jpg' %}" alt=""></a>
-                                    </div>
-                                    <div class="cart-title">
-                                        <h5><a href="#"> Bits Headphone</a></h5>
-                                        <h6><a href="#">Black</a></h6>
-                                        <span>$80.00 x 1</span>
-                                    </div>
-                                    <div class="cart-delete">
-                                        <a href="#"><i class="ti-trash"></i></a>
-                                    </div>
+                                    <h4>Votre panier est vide</h4>
                                 </li>
-                                <li class="single-product-cart">
-                                    <div class="cart-img">
-                                        <a href="#"><img src="{% static 'main/img/cart/3.jpg' %}" alt=""></a>
-                                    </div>
-                                    <div class="cart-title">
-                                        <h5><a href="#"> Bits Headphone</a></h5>
-                                        <h6><a href="#">Black</a></h6>
-                                        <span>$80.00 x 1</span>
-                                    </div>
-                                    <div class="cart-delete">
-                                        <a href="#"><i class="ti-trash"></i></a>
-                                    </div>
-                                </li>
-                                <li class="cart-space">
-                                    <div class="cart-sub">
-                                        <h4>Subtotal</h4>
-                                    </div>
-                                    <div class="cart-price">
-                                        <h4>$240.00</h4>
-                                    </div>
-                                </li>
+                                {% endfor %}
                                 <li class="cart-btn-wrapper">
-                                    <a class="cart-btn btn-hover" href="#">Consulter</a>
-                                    <a class="cart-btn btn-hover" href="#">Commander</a>
+                                    <a class="cart-btn btn-hover" href="{% url 'cart:cart' %}">Consulter</a>
+                                    {% if cart|length > 0 %}
+                                    <a class="cart-btn btn-hover" href="#" id="btnCheckout">Commander</a>
+                                    {% endif %}
                                 </li>
                             </ul>
                         </div>
@@ -274,6 +248,8 @@
     <script src="{% static 'main/js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'main/js/plugins.js' %}"></script>
     <script src="{% static 'main/js/main.js' %}"></script>
+    <script src="{% static 'cart/js/secureajax.js' %}"></script>
+    <script src="{% static 'cart/js/removeitem.js' %}"></script>
 
     {% block script %}
     {% endblock script %}
