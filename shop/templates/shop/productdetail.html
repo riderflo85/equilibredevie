@@ -2,8 +2,229 @@
 {% load static %}
 {% block content %}
 
+<div class="breadcrumb-area pt-205 pb-210" style="background-image: url(/static/main/img/bg/breadcrumb.jpg)">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <h2>Detail du produit</h2>
+            <ul>
+                <li><a href="{% url 'main:index' %}">accueil</a></li>
+                <li> Detail du produit </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="product-details ptb-100 pb-90">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-7 col-12">
+                <div class="product-details-img-content">
+                    <div class="product-details-tab mr-35 product-details-tab2">
+                        <div class="product-details-small nav mr-10 product-details-2" role=tablist>
+                            <a class="active mb-10" href="#pro-details1" data-toggle="tab" role="tab" aria-selected="true">
+                                <img src="/static/main/img/product-details/s5.jpg" alt="">
+                            </a>
+                            <a class="mb-10" href="#pro-details2" data-toggle="tab" role="tab" aria-selected="true">
+                                <img src="/static/main/img/product-details/s6.jpg" alt="">
+                            </a>
+                            <a class="mb-10" href="#pro-details3" data-toggle="tab" role="tab" aria-selected="true">
+                                <img src="/static/main/img/product-details/s7.jpg" alt="">
+                            </a>
+                            <a class="mb-10" href="#pro-details4" data-toggle="tab" role="tab" aria-selected="true">
+                                <img src="/static/main/img/product-details/s8.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="product-details-large tab-content">
+                            <div class="tab-pane active show fade" id="pro-details1" role="tabpanel">
+                                <div>
+                                    <img src="/static/main/img/product-details/l5-details-2.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pro-details2" role="tabpanel">
+                                <div>
+                                    <img src="/static/main/img/product-details/l6-details-2.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pro-details3" role="tabpanel">
+                                <div>
+                                    <img src="/static/main/img/product-details/l7-details-2.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pro-details4" role="tabpanel">
+                                <div>
+                                    <img src="/static/main/img/product-details/l8-details-2.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-5 col-12">
+                <div class="product-details-content">
+                    <h3>{{ item }}</h3>
+                    <div class="details-price">
+                        <span>{{ item.price }}€</span>
+                    </div>
+                    <p>{{ item.description }}</p>
+                    <div class="quick-view-select">
+                        <div class="select-option-part">
+                            <label>Poids*</label>
+                            <select class="select">
+                                <option value="">- Selectionner un poid -</option>
+                                <option value="">1 kg</option>
+                                <option value="">2 kg</option>
+                                <option value="">3 kg</option>
+                                <option value="">4 kg</option>
+                            </select>
+                        </div>
+                    </div>
+                    <form action="{% url 'cart:cart_add' item.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="quickview-plus-minus">
+                            <div class="cart-plus-minus">
+                                {% comment %} <input type="number" value="2" name="qtybutton" class="cart-plus-minus-box"> {% endcomment %}
+                                {{ cart_product_form.quantity }}
+                            </div>
+                            <div class="quickview-btn-cart">
+                                <button class="btn-hover list-btn-style btn-add-cart-2" type="submit">Ajouter au panier</button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="product-details-cati-tag mt-35">
+                        <ul>
+                            <li class="categories-title">Categories :</li>
+                            <li>{{ item.category }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="product-description-review-area pb-90">
+    <div class="container">
+        <div class="product-description-review text-center">
+            <div class="description-review-title nav" role=tablist>
+                <a class="active" href="#pro-dec" data-toggle="tab" role="tab" aria-selected="true">
+                    Description
+                </a>
+                <a href="#pro-review" data-toggle="tab" role="tab" aria-selected="false">
+                    Avis client (0)
+                </a>
+            </div>
+            <div class="description-review-text tab-content">
+                <div class="tab-pane active show fade" id="pro-dec" role="tabpanel">
+                    <p>{{ item.description }}</p>
+                </div>
+                <div class="tab-pane fade" id="pro-review" role="tabpanel">
+                    <a href="#">Ecrivez le premier avis !</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- product area start -->
+<div class="product-area pb-95">
+    <div class="container">
+        <div class="section-title-3 text-center mb-50">
+            <h2>Produits que vous pourriez aimer</h2>
+        </div>
+        <div class="product-style">
+            <div class="related-product-active owl-carousel">
+                {% for item in related_item %}
+                    <div class="product-wrapper">
+                        <div class="product-img">
+                            <a href="{{ item.get_absolute_url }}">
+                                <img src="{{ item.image_shop.url }}" alt='item shop'>
+                            </a>
+                            <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                                {% csrf_token %}
+                                <div class="product-action">
+                                    <div class="d-none">
+                                        {{ cart_product_form.quantity }}
+                                    </div>
+                                    <button type="submit" class="animate-top" title="Ajouter au panier">
+                                        <i class="pe-7s-cart"></i>
+                                    </button>
+                                    <button type="button" class="animate-right" title="Prévisualiser" data-toggle="modal" data-target="#modalProduct{{ product.id }}">
+                                        <i class="pe-7s-look"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="product-content">
+                            <h4><a href="{{ item.get_absolute_url }}">{{ item }}</a></h4>
+                            <span>{{ item.price }}€</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% for item in related_item %}
+<!-- modal -->
+<div class="modal fade" id="modalProduct{{ item.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span class="pe-7s-close" aria-hidden="true"></span>
+    </button>
+    <div class="modal-dialog modal-quickview-width" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="qwick-view-left">
+                    <div class="quick-view-learg-img">
+                        <div class="quick-view-tab-content tab-content">
+                            <div class="tab-pane active show fade" id="modal1" role="tabpanel">
+                                <img src="{% static 'main/img/quick-view/l1.jpg' %}" alt="">
+                            </div>
+                            <div class="tab-pane fade" id="modal2" role="tabpanel">
+                                <img src="{% static 'main/img/quick-view/l2.jpg' %}" alt="">
+                            </div>
+                            <div class="tab-pane fade" id="modal3" role="tabpanel">
+                                <img src="{% static 'main/img/quick-view/l3.jpg' %}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="quick-view-list nav" role="tablist">
+                        <a class="active" href="#modal1" data-toggle="tab" role="tab">
+                            <img src="{% static 'main/img/quick-view/s1.jpg' %}" alt="">
+                        </a>
+                        <a href="#modal2" data-toggle="tab" role="tab">
+                            <img src="{% static 'main/img/quick-view/s2.jpg' %}" alt="">
+                        </a>
+                        <a href="#modal3" data-toggle="tab" role="tab">
+                            <img src="{% static 'main/img/quick-view/s3.jpg' %}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="qwick-view-right">
+                    <div class="qwick-view-content">
+                        <h3>{{ item.name }}</h3>
+                        <div class="price">
+                            <span class="new">{{ item.price }}€</span>
+                        </div>
+                        <p>{{ item.description }}</p>
+                        <form action="{% url 'cart:cart_add' item.id %}" method="post">
+                            {% csrf_token %}
+                            <div class="quickview-plus-minus">
+                                <div class="cart-plus-minus">
+                                    {{ cart_product_form.quantity }}
+                                </div>
+                                <div class="quickview-btn-cart">
+                                    <button class="btn-hover list-btn-style btn-add-cart-2" type="submit">Ajouter au panier</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
 
 {% endblock content %}
 
 {% block script %}
+<script src="{% static 'shop/js/hiddenform.js' %}"></script>
 {% endblock script %}

@@ -52,9 +52,9 @@
                                 <li>
                                     <div class="d-flex justify-content-center align-items-center">
                                         {% if user.civility == 'Mr' %}
-                                        <i class="fas fa-male fa-2x text-dark mr-2"></i>
+                                        <i class="fas fa-male fa-2x hearder-icon mr-2"></i>
                                         {% elif user.civility == 'Mme' %}
-                                        <i class="fas fa-female fa-2x text-dark mr-2"></i>
+                                        <i class="fas fa-female fa-2x hearder-icon mr-2"></i>
                                         {% endif %}
                                         <a href="#" class="login-i"> {{ user.first_name }}</a>
                                     </div>
@@ -62,20 +62,20 @@
                                 <li>
                                     <div class="d-flex justify-content-center align-items-center">
                                         <a href="{% url 'useraccount:logout' %}" class="login-i mr-2"> Déconnexion</a>
-                                        <i class="fas fa-door-open fa-2x text-dark"></i>
+                                        <i class="fas fa-door-open fa-2x hearder-icon"></i>
                                     </div>
                                 </li>
                                 {% else %}
                                 <li>
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <i class="fas fa-user-circle fa-2x text-dark mr-2"></i>
+                                        <i class="fas fa-user-circle fa-2x hearder-icon mr-2"></i>
                                         <a href="{% url 'useraccount:login' %}" class="login-i"> Connexion</a>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="d-flex justify-content-center align-items-center">
                                         <a href="{% url 'useraccount:register' %}" class="login-i mr-2"> Inscription</a>
-                                        <i class="fab fa-wpforms fa-2x text-dark"></i>
+                                        <i class="fab fa-wpforms fa-2x hearder-icon"></i>
                                     </div>
                                 </li>
                                 {% endif %}

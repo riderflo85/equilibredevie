@@ -127,12 +127,14 @@
                                                     <span>{{ product.price }}€</span>
                                                     <p>{{ product.description }}</p>
                                                 </div>
-                                                <div class="product-list-cart-wishlist">
+                                                <div class="product-list-cart-wishlist ml-3">
                                                     <div class="product-list-cart">
                                                         <form action="{% url 'cart:cart_add' product.id %}" method="post">
                                                             {% csrf_token %}
-                                                            {{ cart_product_form.quantity }}
-                                                            <button class="btn-hover list-btn-style btn-add-cart-1" type="submit">Ajouter au panier</button>
+                                                            <div class="d-none">
+                                                                {{ cart_product_form.quantity }}
+                                                            </div>
+                                                            <button class="btn-hover list-btn-style btn-add-cart-2" type="submit">Ajouter au panier</button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -223,15 +225,17 @@
                                 </select>
                             </div>
                         </div> {% endcomment %}
-                        <div class="quickview-plus-minus">
-                            <div class="quickview-btn-cart">
-                                <form action="{% url 'cart:cart_add' product.id %}" method="post">
-                                    {% csrf_token %}
+                        <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                            {% csrf_token %}
+                            <div class="quickview-plus-minus">
+                                <div class="cart-plus-minus">
                                     {{ cart_product_form.quantity }}
-                                    <button class="btn-hover list-btn-style btn-add-cart-1" type="submit">Ajouter au panier</button>
-                                </form>
+                                </div>
+                                <div class="quickview-btn-cart">
+                                    <button class="btn-hover list-btn-style btn-add-cart-2" type="submit">Ajouter au panier</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -15,5 +15,17 @@ class ProductsListView(ListView):
         context['cart_product_form'] = CartAddProductForm()
         return context
 
-def product_detail(request, id):
-    return render(request, 'shop/productdetail.html')
+def product_detail(request, id_item):
+    product = Product.objects.get(pk=id_item)
+    related_product = Product.objects.filter(
+        category=product.category).exclude(pk=product.pk)
+    
+    if len(related_product) > 4:
+        related_product = related_product[:4]
+
+    context = {
+        "item": product,
+        "related_item": related_product,
+        "cart_product_form": CartAddProductForm()
+    }
+    return render(request, 'shop/productdetail.html', context)
