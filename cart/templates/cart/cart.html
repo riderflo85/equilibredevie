@@ -83,10 +83,12 @@
                             <div class="cart-page-total">
                                 <h2>Total de la commande</h2>
                                 <ul>
+                                    <li>Sous total<span>{{ cart.get_total_price }} €</span></li>
+                                    <li>Frais de port<span>0 €</span></li>
                                     <li>Total<span>{{ cart.get_total_price }} €</span></li>
                                 </ul>
                                 {% if cart|length > 0 %}
-                                <a href="#" class="valid-cart">Valider la commande</a>
+                                <a href="{% url 'order:create_order' %}" class="valid-cart">Valider la commande</a>
                                 {% endif %}
                             </div>
                         </div>

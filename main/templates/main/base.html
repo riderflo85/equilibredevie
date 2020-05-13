@@ -115,7 +115,7 @@
                                 <li class="cart-btn-wrapper">
                                     <a class="cart-btn btn-hover" href="{% url 'cart:cart' %}">Consulter</a>
                                     {% if cart|length > 0 %}
-                                    <a class="cart-btn btn-hover" href="#" id="btnCheckout">Commander</a>
+                                    <a class="cart-btn btn-hover" href="{% url 'order:create_order' %}" id="btnCheckout">Commander</a>
                                     {% endif %}
                                 </li>
                             </ul>

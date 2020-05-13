@@ -106,13 +106,3 @@ class Product(models.Model):
         return reverse('shop:product_detail', args=[self.id])
 
 
-class Order(models.Model):
-    reference = models.CharField(
-        max_length=50, verbose_name='Référence de la commande'
-    )
-
-
-class ProductQuantity(models.Model):
-    id_product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    id_order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    quantity = models.IntegerField(null=False, verbose_name='Quantité')
