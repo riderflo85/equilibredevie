@@ -4,8 +4,16 @@ from shop.models import Product
 
 class Order(models.Model):
     reference = models.CharField(
-        max_length=50, verbose_name='Référence de la commande'
+        max_length=21, verbose_name='Référence de la commande'
     )
+    last_name = models.CharField(max_length=150)
+    first_name = models.CharField(max_length=30)
+    adress = models.CharField(max_length=350)
+    postal_code = models.IntegerField()
+    city = models.CharField(max_length=250)
+    dep = models.CharField(max_length=100)
+    phone_number = models.IntegerField()
+    email = models.EmailField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)

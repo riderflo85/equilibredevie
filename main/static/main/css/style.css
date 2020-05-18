@@ -7099,9 +7099,10 @@ p.checkout-coupon input[type="submit"] {
     height: 60px;
     margin-left: 15px;
 }
-.order-button-payment input {
-    background: #464646 none repeat scroll 0 0;
+.order-button-payment button {
+    background: #578a01 none repeat scroll 0 0;
     border: medium none;
+    border-radius: 5px;
     color: #fff;
     font-size: 17px;
     font-weight: 600;
@@ -7114,10 +7115,38 @@ p.checkout-coupon input[type="submit"] {
     border: 1px solid transparent;
     cursor: pointer;
 }
-.order-button-payment input:hover {
-    background: #050035;
-    border: 1px solid #050035;
+.order-button-payment button:disabled {
+    cursor: auto;
+    background: rgba(87, 138, 1, 0.5) !important;
+    border: none !important;
     color: #fff;
+}
+.order-button-payment button:hover {
+    background: #3751c8;
+    border: 1px solid #3751c8;
+    color: #fff;
+}
+@keyframes spinner-border {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+.spinner-border-sm {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-width: .2em;
+}
+.spinner-border {
+    display: inline-block;
+    width: 1.4rem;
+    height: 1.4rem;
+    vertical-align: text-bottom;
+    border: .25em solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    -webkit-animation: spinner-border .75s linear infinite;
+    animation: spinner-border .75s linear infinite;
 }
 .coupon-info p.form-row input[type="submit"] {
     background: #252525 none repeat scroll 0 0;

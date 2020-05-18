@@ -19,55 +19,55 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-12">
                     <form action="#">
-                        <div class="checkbox-form">						
+                        <div class="checkbox-form">
                             <h3>Informations de livraison / facturation</h3>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Nom <span class="required">*</span></label>										
-                                        <input id="formLastName" type="text" placeholder="" value="{{ user.last_name }}"/>
+                                        <input id="formLastName" type="text"  value="{{ user.last_name }}" required/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Prénom <span class="required">*</span></label>										
-                                        <input id="formFirstName" type="text" placeholder="" value="{{ user.first_name }}"/>
+                                        <input id="formFirstName" type="text"  value="{{ user.first_name }}" required/>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Adresse <span class="required">*</span></label>
-                                        <input id="formAdress" type="text" placeholder="Adresse de livraison" value="{{ user.adress }}"/>
+                                        <input id="formAdress" type="text" placeholder="Adresse de livraison" value="{{ user.adress }}" required/>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Ville <span class="required">*</span></label>
-                                        <input id="formCity" type="text" value="{{ user.city }}"/>
+                                        <input id="formCity" type="text" value="{{ user.city }}" required/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Département <span class="required">*</span></label>										
-                                        <input id="formDep" type="text" placeholder="" />
+                                        <input id="formDep" type="text" required/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Code Postal <span class="required">*</span></label>										
-                                        <input id="formPostalCode"type="number" value="{{ user.postal_code }}" class="form-control"/>
+                                        <input id="formPostalCode"type="number" value="{{ user.postal_code }}" class="form-control" required/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Adresse Email <span class="required">*</span></label>										
-                                        <input id="formEmail"type="email" value="{{ user.email }}"/>
+                                        <input id="formEmail"type="email" value="{{ user.email }}" required/>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list">
                                         <label>Numéro de téléphone  <span class="required">*</span></label>										
-                                        <input id="formPhoneNumber"type="number" value="0{{ user.phone_number }}" class="form-control"/>
+                                        <input id="formPhoneNumber"type="number" value="0{{ user.phone_number }}" class="form-control" required/>
                                     </div>
                                 </div>
                             </div>
@@ -88,49 +88,49 @@
                                    <div class="col-md-6">
                                         <div class="checkout-form-list">
                                             <label>Nom <span class="required">*</span></label>										
-                                            <input type="text" placeholder=""/>
+                                            <input type="text" id="AnotherFormLN"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="checkout-form-list">
                                             <label>Prénom <span class="required">*</span></label>										
-                                            <input type="text" placeholder=""/>
+                                            <input type="text" id="AnotherFormFN"/>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="checkout-form-list">
                                             <label>Adresse <span class="required">*</span></label>
-                                            <input type="text" placeholder="Adresse de livraison"/>
+                                            <input type="text" placeholder="Adresse de livraison" id="AnotherFormAd"/>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="checkout-form-list">
                                             <label>Ville <span class="required">*</span></label>
-                                            <input type="text"/>
+                                            <input type="text" id="AnotherFormCi"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="checkout-form-list">
                                             <label>Département <span class="required">*</span></label>										
-                                            <input type="text" placeholder="" />
+                                            <input type="text" id="AnotherFormDe"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="checkout-form-list">
                                             <label>Code Postal <span class="required">*</span></label>										
-                                            <input type="number" class="form-control"/>
+                                            <input type="number" class="form-control" id="AnotherFormCP"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="checkout-form-list">
                                             <label>Adresse Email <span class="required">*</span></label>										
-                                            <input type="email"/>
+                                            <input type="email" id="AnotherFormEm"/>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="checkout-form-list">
                                             <label>Numéro de téléphone  <span class="required">*</span></label>										
-                                            <input type="number" class="form-control"/>
+                                            <input type="number" class="form-control" id="AnotherFormPN"/>
                                         </div>
                                     </div>
                                 </div>
@@ -167,7 +167,7 @@
                                     </tr>
                                     {% empty %}
                                     <tr class="cart_item">
-                                        <td class="product-name">
+                                        <td class="product-name" id="noneProductInCart">
                                             Aucun produit dans votre panier pour effectuer une commande !
                                         </td>
                                     </tr>
@@ -199,17 +199,17 @@
                                 <div class="panel-group" id="faq">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h5 class="panel-title"><a class="collapsed" data-toggle="collapse" aria-expanded="false" data-parent="#faq" href="#payment-3">Payement par carte bancaire</a></h5>
+                                            <h5 class="panel-title"><a class="collapsed" data-toggle="collapse" aria-expanded="false" data-parent="#faq" href="#payment-3">Paiement par carte bancaire</a></h5>
                                         </div>
                                         <div id="payment-3" class="panel-collapse collapse">
                                             <div class="panel-body">
-                                                <p>Payement sécuriser.</p>
+                                                <p>Paiement sécuriser.</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="order-button-payment">
-                                    <input id="validCheckout" type="submit" value="Valider la commande" />
+                                    <button id="validCheckout" type="button">Valider la commande</button>
                                 </div>								
                             </div>
                         </div>
