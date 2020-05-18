@@ -82,6 +82,14 @@ $(document).ready(function () {
                     type: 'POST',
                     dataType: 'json',
                     data: dataForm,
+                    success: function (res) {
+                        if (res['success'] === true) {
+                            document.location.href = document.location.href + `success/${res['ref']}/`;
+                        }
+                    },
+                    error: function (err) {
+                        console.warn(err);
+                    },
                 });
             }, 2000);
         }

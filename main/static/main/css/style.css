@@ -533,6 +533,7 @@
     z-index: 99;
 }
 .cart-btn:hover {
+    cursor: pointer;
     color: #fff;
 }
 .btn-hover.cart-btn::before {
@@ -9804,4 +9805,8 @@ input.cart-plus-minus-box::-o-outer-spin-button {
 }
 .control-checkbox input:checked + .control_indicator::before {
     animation-name: s-ripple-dup;
+}
+.box-success-order {
+    margin-top: 20rem;
+    margin-bottom: 20rem;
 }

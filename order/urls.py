@@ -5,4 +5,5 @@ app_name = "order"
 
 urlpatterns = [
     path('', views.create_order, name="create_order"),
+    path('success/<str:ref_order>/', views.success_order, name="successorder"),
 ]

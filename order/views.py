@@ -1,6 +1,6 @@
 from datetime import datetime
-from django.shortcuts import render
 from django.http import JsonResponse
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
 from .models import Order, OrderProductQuantity
@@ -56,7 +56,13 @@ def create_order(request):
         cart.clear()
         request.session.modified = True
 
-        return JsonResponse({'status': 'success'})
+        return JsonResponse({'success': True, 'ref': datetime_ref})
 
     else:
         return render(request, 'order/createorder.html')
+
+def success_order(request, ref_order):
+    context = {
+        'order': get_object_or_404(Order, reference=ref_order)
+    }
+    return render(request, 'order/ordersuccess.html', context)
