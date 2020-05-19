@@ -27,3 +27,6 @@ DATABASES = {
         'PORT': os.environ.get('PORT_DB')
     }
 }
+
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY')
+STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_TEST_PUBLISHABLE_KEY')

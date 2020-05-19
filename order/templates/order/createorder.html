@@ -210,6 +210,7 @@
                                 </div>
                                 <div class="order-button-payment">
                                     <button id="validCheckout" type="button">Valider la commande</button>
+                                    <button type="button" class="stripe-button">Payer</button>
                                 </div>								
                             </div>
                         </div>
@@ -218,6 +219,9 @@
             </div>
         </div>
     </div>
+    <script src="https://checkout.stripe.com/checkout.js" data-key="dfgtttgggtt" data-description='Pay By Credit Cart' data-amount= "{{ cart.get_total_price }}" data-locale="auto">
+    </script>
+
 
 {% endblock content %}
 

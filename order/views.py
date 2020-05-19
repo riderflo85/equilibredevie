@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
 from .models import Order, OrderProductQuantity
+import stripe
 
 
 @login_required
