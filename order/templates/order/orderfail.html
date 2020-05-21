@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="breadcrumb-area pt-205 pb-210" style="background-image: url(/static/main/img/bg/breadcrumb.jpg)">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <h2>Échec de payement</h2>
+            <ul>
+                <li><a href="{% url 'main:index' %}">accueil</a></li>
+                <li> Échec de payement </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container-fluid box-success-order">
+    <div class="row">
+        <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+            <h3>Votre commande portant la référence {{ order.reference }}, ayant un montant de {{ order.total_price }}€, à rencontrée un problème lors du payement.</h3>
+            <h4>Merci de re-essayer ultérieurement ou de nous contacter.</h4>
+        </div>
+        <div class="col-12 ">
+            <a href="{% url 'main:index' %}" class="float-right mr-5 cart-btn btn-hover">Continuer</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

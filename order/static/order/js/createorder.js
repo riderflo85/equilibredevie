@@ -84,7 +84,13 @@ $(document).ready(function () {
                     data: dataForm,
                     success: function (res) {
                         if (res['success'] === true) {
-                            document.location.href = document.location.href + `success/${res['ref']}/`;
+                            var stripe = Stripe(res['key']);
+
+                            stripe.redirectToCheckout({
+                                sessionId: res['stripe_session'],
+                            }).then(function (result) {
+                            });
+                            
                         }
                     },
                     error: function (err) {

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-
+<script src="https://js.stripe.com/v3/"></script>
 <div class="breadcrumb-area pt-205 pb-210" style="background-image: url(/static/main/img/bg/breadcrumb.jpg)">
     <div class="container">
         <div class="breadcrumb-content text-center">
@@ -210,8 +210,8 @@
                                 </div>
                                 <div class="order-button-payment">
                                     <button id="validCheckout" type="button">Valider la commande</button>
-                                    <button type="button" class="stripe-button">Payer</button>
                                 </div>								
+                                
                             </div>
                         </div>
                     </div>
@@ -219,8 +219,6 @@
             </div>
         </div>
     </div>
-    <script src="https://checkout.stripe.com/checkout.js" data-key="dfgtttgggtt" data-description='Pay By Credit Cart' data-amount= "{{ cart.get_total_price }}" data-locale="auto">
-    </script>
 
 
 {% endblock content %}

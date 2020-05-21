@@ -28,5 +28,8 @@ DATABASES = {
     }
 }
 
+SUCCES_URL_PAYMENT = 'http://127.0.0.1:8000/order/success?session_id={CHECKOUT_SESSION_ID}'
+ERROR_URL_PAYMENT = 'http://127.0.0.1:8000/order/error'
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY')
 STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_TEST_PUBLISHABLE_KEY')
+STRIPE_PRODUCT = os.environ.get('STRIPE_TEST_PRODUCT')
