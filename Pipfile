@@ -12,6 +12,7 @@ django-extensions = "*"
 mysqlclient = "*"
 pillow = "*"
 stripe = "*"
+sendgrid = "*"
 
 [requires]
 python_version = "3.8"

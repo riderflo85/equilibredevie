@@ -17,7 +17,11 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
+    receipt_send = models.BooleanField(default=False)
+    validate_order_send = models.BooleanField(default=False)
+    invoice_send = models.BooleanField(default=False)
     stripe_id = models.CharField(max_length=150, blank=True)
+    url_receipt = models.CharField(max_length=300)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     note = models.TextField(blank=True)
 

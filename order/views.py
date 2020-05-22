@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
 from .models import Order, OrderProductQuantity
 from .check_stripe_client import check_stripe_client
+from senderemail import order_receipt
 import stripe
 
 
@@ -98,9 +99,18 @@ def success_order(request):
     response = stripe.PaymentIntent.retrieve(order.stripe_id)
 
     if response['status'] == 'succeeded':
+        order.url_receipt = response['charges']['data'][0]['receipt_url']
         order.paid = True
-        order.save()
+    else:
+        order.paid = False
+    order.save()
     
+    if order_receipt.sender_receipt(order, request.user) == "202":
+        order.receipt_send = True
+    else:
+        order.receipt_send = False
+    order.save()
+
     return render(request, 'order/ordersuccess.html', context)
 
 def fail_order(request):
