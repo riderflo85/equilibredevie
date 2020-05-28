@@ -14,6 +14,7 @@ class Order(models.Model):
     dep = models.CharField(max_length=100)
     phone_number = models.IntegerField()
     email = models.EmailField()
+    another_delivery_adress = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)

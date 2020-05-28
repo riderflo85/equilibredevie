@@ -24,9 +24,9 @@ def sender_receipt(order, user):
     mail = Mail(from_email, to_email, subject, content)
     response = sg.client.mail.send.post(request_body=mail.get())
 
-    return str(response.status_code)
+    return response
 
-def sender_validation_cmd_client(order, user, another_adress):
+def sender_validation_cmd_client(order, user):
     """
     Send the email to the client for validate the order.
     """
@@ -48,7 +48,7 @@ def sender_validation_cmd_client(order, user, another_adress):
         }
     }
 
-    if another_adress:
+    if order.another_delivery_adress:
         data['cmd']['anotheradress'] = {
             "ifyes": "true",
             "nameclient": f"{order.last_name.upper()} {order.first_name}",

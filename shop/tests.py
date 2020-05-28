@@ -53,5 +53,5 @@ class SendEmailTest(TestCase):
             quantity=1,
             price=self.product.price
         )
-        res = order_receipt.sender_validation_cmd_client(order, self.user, True)
+        res = order_receipt.sender_validation_cmd_client(order, self.user)
         self.assertEqual(res.status_code, 202)

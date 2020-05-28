@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-12 d-flex flex-column justify-content-center align-items-center">
             <h3>Votre commande portant la référence {{ order.reference }}, ayant un montant de {{ order.total_price }}€, à bien été validé.</h3>
-            <h4>Un email avec le récapitulatif ainsi qu'un reçu de commande, vous a été envoyé.</h4>
+            <h4>Un email avec le récapitulatif ainsi qu'un reçu de commande, vous a été envoyé à {{ user.email }}.</h4>
         </div>
         <div class="col-12 ">
             <a href="{% url 'main:index' %}" class="float-right mr-5 cart-btn btn-hover">Continuer</a>
