@@ -9,7 +9,7 @@ class SendEmailTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
             'TestPseudoNoReplica',
-            'supertester@tester.com',
+            'grenaille.florent85@gmail.com',
             'testUserPassword!',
             civility='Mr',
             first_name='TestFirstName',
@@ -46,5 +46,12 @@ class SendEmailTest(TestCase):
             url_receipt="https://url_de_recu_de_commande.com",
             total_price=12.22,
             note=' ',
-            
         )
+        OrderProductQuantity.objects.create(
+            id_product=self.product,
+            id_order=order,
+            quantity=1,
+            price=self.product.price
+        )
+        res = order_receipt.sender_validation_cmd_client(order, self.user, True)
+        self.assertEqual(res.status_code, 202)
