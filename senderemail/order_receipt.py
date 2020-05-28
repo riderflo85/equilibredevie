@@ -1,6 +1,6 @@
 import os, requests
 from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Email, To, Content, Mail
+from sendgrid.helpers.mail import Email, To, Content, Mail, Personalization
 from order.models import OrderProductQuantity
 
 
@@ -76,36 +76,18 @@ def sender_validation_cmd_client(order, user, another_adress):
             "quantity": str(product.quantity)
         })
 
-    url = "https://api.sendgrid.com/v3/mail/send"
+    mail = Mail()
+    mail.from_email = Email(
+        os.environ.get('FROM_EMAIL'),
+        os.environ.get('FROM_NAME_EMAIL')
+    )
+    mail.template_id = os.environ.get('ID_TEMPLATE_VALID_CMD')
+    mail.subject = "Validation de commande"
+    p = Personalization()
+    p.add_to(Email(user.email, str(user)))
+    p.dynamic_template_data = data
+    mail.add_personalization(p)
+    sg = SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
+    response = sg.client.mail.send.post(request_body=mail.get())
 
-    payload = {
-        "personalizations": [{
-            "to": [{
-                "email": user.email,
-                "name": str(user)
-            }],
-            "dynamic_template_data": data,
-            "subject": "Validation de commande"
-        }],
-        "from": {
-            "email": os.environ.get('FROM_EMAIL'),
-            "name": os.environ.get('FROM_NAME_EMAIL')
-        },
-        "reply_to": {
-            "email": os.environ.get('FROM_EMAIL'),
-            "name": os.environ.get('FROM_NAME_EMAIL')
-        },
-        "template_id": "d-543faba5b6db4e45971c71f97f3fe243"
-    }
-
-    # payload = str(payload).replace("'", "\"")
-    headers = {
-        'authorization': f"Bearer {os.environ.get('SENDGRID_API_KEY')}",
-        'content-type': "application/json; charset=utf8"
-    }
-
-    response = requests.post(url, data=payload, headers=headers)
-
-    # import pdb; pdb.set_trace()
-    return response.text
-    # return str(payload)
+    return response
