@@ -1,7 +1,7 @@
 from django.test import TestCase
 from useraccount.models import User
 from order.models import Order, OrderProductQuantity
-from senderemail import order_receipt
+from senderemail import order_receipt, new_command
 from .models import Product, Category
 
 
@@ -54,4 +54,28 @@ class SendEmailTest(TestCase):
             price=self.product.price
         )
         res = order_receipt.sender_validation_cmd_client(order, self.user)
+        self.assertEqual(res.status_code, 202)
+
+    def test_send_email_new_cmd(self):
+        order = Order.objects.create(
+            reference="21052020172922666298",
+            last_name="Grenaille",
+            first_name="Florent",
+            adress="Route de la Bêchée",
+            postal_code=85300,
+            city="Challans",
+            dep="vendée",
+            phone_number=789651420,
+            email="florent@gmail.com",
+            url_receipt="https://url_de_recu_de_commande.com",
+            total_price=12.22,
+            note=' ',
+        )
+        OrderProductQuantity.objects.create(
+            id_product=self.product,
+            id_order=order,
+            quantity=1,
+            price=self.product.price
+        )
+        res = new_command.sender_alert_new_cmd(order, self.user)
         self.assertEqual(res.status_code, 202)

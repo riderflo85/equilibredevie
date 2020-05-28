@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from cart.cart import Cart
 from .models import Order, OrderProductQuantity
 from .check_stripe_client import check_stripe_client
-from senderemail import order_receipt
+from senderemail import order_receipt, new_command
 import stripe
 
 
@@ -109,6 +109,7 @@ def success_order(request):
 
     res_receipt = order_receipt.sender_receipt(order, request.user)
     res_validate_cmd = order_receipt.sender_validation_cmd_client(order, request.user)
+    new_command.sender_alert_new_cmd(order, request.user)
 
     if res_validate_cmd.status_code == 202:
         order.validate_order_send = True
