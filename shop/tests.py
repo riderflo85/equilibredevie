@@ -9,7 +9,7 @@ class SendEmailTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
             'TestPseudoNoReplica',
-            'grenaille.florent85@gmail.com',
+            'test.user@gmail.com',
             'testUserPassword!',
             civility='Mr',
             first_name='TestFirstName',
