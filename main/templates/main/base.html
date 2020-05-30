@@ -31,7 +31,7 @@
             <div class="container-fluid">
                 <div class="header-bottom-wrapper">
                     <div class="logo-2 ptb-35">
-                        <a href="index.html">
+                        <a href="{% url 'main:index' %}">
                             <img src="{% static 'main/img/logo/logo1.png' %}" alt="">
                         </a>
                     </div>
@@ -56,7 +56,7 @@
                                         {% elif user.civility == 'Mme' %}
                                         <i class="fas fa-female fa-2x hearder-icon mr-2"></i>
                                         {% endif %}
-                                        <a href="#" class="login-i"> {{ user.first_name }}</a>
+                                        <a href="{% url 'useraccount:account' %}" class="login-i"> {{ user.first_name }}</a>
                                     </div>
                                 </li>
                                 <li>
@@ -127,11 +127,17 @@
                         <div class="mobile-menu">
                             <nav id="mobile-menu-active">
                                 <ul class="menu-overflow">
-                                    <li><a href="#">HOME</a></li>
-                                    <li><a href="#">pages</a></li>
-                                    <li><a href="#">shop</a></li>
-                                    <li><a href="#">BLOG</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="{% url 'main:index' %}">accueil</a></li>
+                                    <li><a href="#">à propos de nous</a></li>
+                                    <li><a href="{% url 'shop:shop' %}">boutique</a></li>
+                                    <li><a href="contact.html">contact</a></li>
+                                    {% if user.is_authenticated %}
+                                    <li><a href="{% url 'useraccount:account' %}" class="login-i">{{ user.first_name }}</a></li>
+                                    <li><a href="{% url 'useraccount:logout' %}" class="login-i">Déconnexion</a></li>
+                                    {% else %}
+                                    <li><a href="{% url 'useraccount:login' %}" class="login-i">Connexion</a></li>
+                                    <li><a href="{% url 'useraccount:register' %}" class="login-i mr-2">Inscription</a></li>
+                                    {% endif %}
                                 </ul>
                             </nav>							
                         </div>

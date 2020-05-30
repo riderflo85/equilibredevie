@@ -1,6 +1,7 @@
 # from django.contrib.auth.decorators import 
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, RegisterForm
 from .models import User
 
@@ -67,3 +68,7 @@ def register(request):
     context['form'] = form
 
     return render(request, 'useraccount/register.html', context)
+
+@login_required
+def account(request):
+    return render(request, 'useraccount/account.html')

@@ -1,0 +1,155 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="breadcrumb-area pt-205 pb-210" style="background-image: url(/static/main/img/bg/breadcrumb.jpg)">
+    <div class="container">
+        <div class="breadcrumb-content text-center">
+            <h2>Mon compte</h2>
+            <ul>
+                <li><a href="{% url 'main:index' %}">accueil</a></li>
+                <li> mon compte </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container-fluid user-infos-block size-block">
+    <div class="row size-block">
+        <div class="col-4 col-lg-3 offset-lg-1 mr-5 tab-link-menu">
+            <div class="text-center label-user">
+                <h3 class="text-white">{{ user }}</h3>
+            </div>
+            <div class="list-group text-center" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-infos-user-list" data-toggle="list" href="#list-infos-user" role="tab" aria-controls="infos-user">Informations personnelles</a>
+                <a class="list-group-item list-group-item-action" id="list-pref-list" data-toggle="list" href="#list-pref" role="tab" aria-controls="pref">Préférences</a>
+                <a class="list-group-item list-group-item-action" id="list-cmd-list" data-toggle="list" href="#list-cmd" role="tab" aria-controls="cmd">Mes commandes</a>
+            </div>
+        </div>
+        <div class="col-8 col-lg-7">
+            <div class="tab-content h-100" id="nav-tabContent">
+                <div class="tab-pane fade show active h-100" id="list-infos-user" role="tabpanel" aria-labelledby="list-infos-user-list">
+                    <div class="d-flex flex-column justify-content-center align-items-center h-100 pt-5">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-6 col-lg-4 pr-0 part-left" id="titleInfosUser">
+                                    <p class="lead">
+                                        <strong>Civilité: </strong>
+                                    </p>
+                                    <p class="lead">
+                                        <strong>Nom: </strong>
+                                    </p>
+                                    <p class="lead">
+                                        <strong>Prénom: </strong>
+                                    </p>
+                                    <p class="lead">
+                                        <strong>Nom d'utilisateur: </strong>
+                                    </p>
+                                    <p class="lead">
+                                        <strong>Adresse e-mail: </strong>
+                                    </p>
+                                    <p class="lead">
+                                        <strong>Adresse e-mail vérifiée: </strong>
+                                    </p>
+                                    <p class="lead">
+                                        <strong>Numéro de téléphone: </strong>
+                                    </p>
+                                    <p class="lead">
+                                        <strong>Adresse: </strong>
+                                    </p>
+                                    <p class="lead">
+                                        <strong>Code postal: </strong>
+                                    </p>
+                                    <p class="lead">
+                                        <strong>Ville: </strong>
+                                    </p>
+                                </div>
+                                <div class="col-6 col-lg-8 pl-0 part-right" id="contentUserInfos">
+                                    <p class="d-none error-message" id="messageError">Une erreur est survenu, merci de vérifier les champs de saisie !</p>
+                                    <p class="lead" id="userGroup">{{ user.civility }}</p>
+                                    <p class="lead" id="userLastName">{{ user.last_name }}</p>
+                                    <p class="lead" id="userFirstName">{{ user.first_name }}</p>
+                                    <p class="lead" id="userPseudo">{{ user.username }}</p>
+                                    <p class="lead" id="userEmail">{{ user.email }}</p>
+                                    {% if user.is_verified %}
+                                    <p class="lead" id="userValidEmail"><i class="fas fa-check-circle"></i></p>
+                                    {% else %}
+                                    <p class="lead" id="userNotValidEmail"><i class="fas fa-times-circle"></i></p>
+                                    {% endif %}
+                                    <p class="lead" id="userPhone">0{{ user.phone_number }}</p>
+                                    <p class="lead" id="userGroup">{{ user.adress }}</p>
+                                    <p class="lead" id="userGroup">{{ user.postal_code }}</p>
+                                    <p class="lead" id="userGroup">{{ user.city }}</p>
+                                </div>
+                                <div class="col-6 part-right" id="contentFormUserInfos" style="display: none;">
+                                    <div class="input-group form-group-edit">
+                                        <input class="form-control" type="text" name="civility" maxlength="30" id="id_civility" value="{{ user.civility }}">
+                                    </div>
+                                    <div class="input-group form-group-edit">
+                                        <input class="form-control" type="text" name="last_name" maxlength="30" id="id_last_name" value="{{ user.last_name }}">
+                                    </div>
+                                    <div class="input-group form-group-edit">
+                                        <input class="form-control" type="text" name="first_name" maxlength="30" id="id_first_name" value="{{ user.first_name }}">
+                                    </div>
+                                    <div class="input-group form-group-edit">
+                                        <input class="form-control" type="text" name="pseudo" maxlength="30" id="id_pseudo" value="{{ user.username }}">
+                                    </div>
+                                    <div class="input-group form-group-edit">
+                                        <input class="form-control" type="email" name="email" id="id_email" value="{{ user.email }}">
+                                    </div>
+                                    <div class="input-group form-group-edit">
+                                        <input class="form-control"  type="text" name="phone_number" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" maxlength="10" id="id_phone_number" value="0{{ user.phone_number }}">
+                                    </div>
+                                    <div class="input-group form-group-edit">
+                                        <input class="form-control" type="text" name="adress" maxlength="250" id="id_adress" value="{{ user.adress }}">
+                                    </div>
+                                    <div class="input-group form-group-edit">
+                                        <input class="form-control" type="text" name="postal_code" maxlength="250" id="id_postal_code" value="{{ user.postal_code }}">
+                                    </div>
+                                    <div class="input-group form-group-edit">
+                                        <input class="form-control" type="text" name="city" maxlength="250" id="id_city" value="{{ user.city }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pos-btn d-flex">
+                            <button type="button" class="btn-user-account btn-hover" id="changeInfosUser">Éditer vos informations <i class="fas fa-pencil-alt"></i></button>
+                            <button type="button" class="btn-user-account btn-hover mr-2" id="cancel" style="display: none;">Annuler <i class="fas fa-times"></i></button>
+                            <button type="button" class="btn-user-account btn-hover ml-2" id="confirmInfosUser" style="display: none;">Valider <i class="fas fa-check"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade h-100" id="list-pref" role="tabpanel" aria-labelledby="list-pref-list">
+                    <div class="d-flex flex-column justify-content-center align-items-center h-100">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-6 col-lg-5 pr-0 part-left">
+                                    <p class="lead size-edit-first" id="passwd"><strong>Nouveau mot de passe</strong></p>
+                                    <p class="lead size-edit" id="confirmPasswd"><strong>Confirmez votre mot de passe</strong></p>
+                                </div>
+                                <div class="col-6 col-lg-7 pl-0 part-right" id="contentUserInfos">
+                                    <div class="input-group form-group-edit">
+                                        <input class="form-control" type="password" name="pwd" maxlength="30" id="id_pawd">
+                                    </div>
+                                    <div class="input-group form-group-edit">
+                                        <input class="form-control" type="password" name="confirm_pwd" maxlength="30" id="id_confirm_pwd">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pos-btn d-flex">
+                            <button type="button" class="btn-user-account btn-hover ml-2" id="confirmInfosUser">Valider <i class="fas fa-check"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade h-100" id="list-cmd" role="tabpanel" aria-labelledby="list-cmd-list">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+{% block script %}
+<script src="{% static 'useraccount/js/edituserinfos.js' %}"></script>
+{% endblock script %}

@@ -9810,3 +9810,66 @@ input.cart-plus-minus-box::-o-outer-spin-button {
     margin-top: 20rem;
     margin-bottom: 20rem;
 }
+.user-infos-block {
+    margin: 10rem 0;
+}
+.size-block {
+    min-height: 30rem;
+}
+.tab-link-menu {
+    background-color: #3751c8;
+    border: 0;
+    border-radius: 20px;
+    padding-top: 9%;
+}
+.list-group-item.active {
+    background-color: #00a2e8 !important;
+    border-color: #00a2e8 !important;
+}
+.label-user {
+    position: absolute;
+    width: 100%;
+    top: 1rem;
+    left: -1%
+}
+#userValidEmail {
+    color: #578a01;
+}
+#userNotValidEmail {
+    color: #ce1115;
+}
+.form-group-edit {
+    margin-bottom: 0.5rem;
+}
+.pos-btn {
+    position: relative;
+    top: 4%;
+    left: 25%;
+}
+.btn-user-account {
+    background-color: #578a01;
+    border: 0;
+    border-radius: 5px;
+    color: #fffffe;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    padding: 16px 30px 16px;
+    text-transform: uppercase;
+    z-index: 99;
+}
+.btn-user-account:hover {
+    cursor: pointer;
+    color: #fff;
+}
+.btn-hover.btn-user-account::before {
+    border-radius: 5px;
+}
+.size-edit-first {
+    margin-bottom: 1.7rem;
+    margin-top: 1rem;
+}
+.size-edit {
+    margin: 1.8rem 0;
+}

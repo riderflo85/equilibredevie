@@ -2056,7 +2056,7 @@
         right: 309px;
     }
     .mobile-menu .mean-nav ul.menu-overflow {
-        height: 220px;
+        height: 300px;
         margin-top: 10px;
         overflow-y: auto;
     }
@@ -3989,7 +3989,7 @@
       background: rgba(0, 0, 0, 0) url("../../assets/img/icon-img/4.png") no-repeat scroll right 10px center;
     }  
     .mobile-menu .mean-nav ul.menu-overflow {
-      height: 215px;
+      height: 300px;
       margin-top: 10px;
       overflow-y: auto;
     }
