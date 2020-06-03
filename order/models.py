@@ -2,6 +2,10 @@ from django.db import models
 from shop.models import Product
 
 
+STATUS = [
+    ('prepare', 'En cours de préparation'),
+    ('send', 'Expédié')
+]
 class Order(models.Model):
     reference = models.CharField(
         max_length=21, verbose_name='Référence de la commande'
@@ -25,6 +29,11 @@ class Order(models.Model):
     url_receipt = models.CharField(max_length=300)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     note = models.TextField(blank=True)
+    status = models.CharField(
+        max_length=30,
+        choices=STATUS,
+        verbose_name='État de la commande'
+    )
 
     class Meta:
         ordering = ('-created',)
@@ -32,8 +41,8 @@ class Order(models.Model):
     def __str__(self):
         return 'Order {}'.format(self.id)
     
-    def get_total_price(self):
-        return sum(item.get_price() for item in self.items.all())
+    def get_all_products(self):
+        return OrderProductQuantity.objects.filter(id_order=self)
 
 
 class OrderProductQuantity(models.Model):

@@ -9873,3 +9873,6 @@ input.cart-plus-minus-box::-o-outer-spin-button {
 .size-edit {
     margin: 1.8rem 0;
 }
+.detail-cmd td {
+    vertical-align: middle !important;
+}

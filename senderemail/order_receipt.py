@@ -50,7 +50,7 @@ def sender_validation_cmd_client(order, user):
 
     if order.another_delivery_adress:
         data['cmd']['anotheradress'] = {
-            "ifyes": "true",
+            "ifyes": True,
             "nameclient": f"{order.last_name.upper()} {order.first_name}",
             "adress": order.adress,
             "postalcode": str(order.postal_code),
@@ -60,7 +60,7 @@ def sender_validation_cmd_client(order, user):
 
     else:
         data['cmd']['anotheradress'] = {
-            "ifyes": "false",
+            "ifyes": False,
             "nameclient": "none",
             "adress": "none",
             "postalcode": "none",

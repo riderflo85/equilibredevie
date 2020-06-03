@@ -142,7 +142,58 @@
                     </div>
                 </div>
                 <div class="tab-pane fade h-100" id="list-cmd" role="tabpanel" aria-labelledby="list-cmd-list">
-                    
+                    <div class="d-flex flex-column justify-content-center align-items-center h-100 pt-5">
+                        {% for order in user.order.all %}
+                        <div class="accordion w-100" id="accordion{{ order.reference }}">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Commande passée le {{ order.created }}</th>
+                                        <th scope="col">Référence n° {{ order.reference }}</th>
+                                        <th scope="col">Montant TTC {{ order.total_price }}€</th>
+                                        {% if order.status == 'En cours de préparation' %}
+                                        <th scope="col" style="color: #ce1115;">{{ order.status }}</th>
+                                        {% else %}
+                                        <th scope="col" style="color: #578a01">{{ order.status }}</th>
+                                        {% endif %}
+                                        <th scope="col"><button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{ order.reference }}" aria-expanded="true"
+                                            aria-controls="collapse{{ order.reference }}">
+                                            Détail
+                                        </button></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            <div id="collapse{{ order.reference }}" class="collapse" aria-labelledby="heading{{ order.reference }}" data-parent="#accordion{{ order.reference }}">
+                                <table class="table">
+                                    <tbody>
+                                        {% for orderProduct in order.get_all_products %}
+                                        <tr class="detail-cmd">
+                                            <td>
+                                                <img src="{{ orderProduct.id_product.image_cart.url }}" alt="">
+                                            </td>
+                                            <td>{{ orderProduct.id_product.name }}</td>
+                                            <td>X {{ orderProduct.quantity }}</td>
+                                            <td>{{ orderProduct.price }} € TTC</td>
+                                            <td>{{ orderProduct.get_price }} € TTC</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="row mb-5">
+                                    <div class="col-md-5 ml-auto">
+                                        <div class="cart-page-total pt-3">
+                                            <ul>
+                                                <li>Sous total<span>{{ order.total_price }} €</span></li>
+                                                <li>Frais de port<span>0 €</span></li>
+                                                <li>Total<span>{{ order.total_price }} €</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
