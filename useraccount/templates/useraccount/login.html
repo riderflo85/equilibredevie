@@ -25,7 +25,7 @@
                             <form action="." method="post">
                                 {% csrf_token %}
                                 {% if error %}
-                                <h3 class="text-warning">Utilisateur incorrect ou mot de passe invalide</h3>
+                                <h3 class="text-warning">Utilisateur incorrect, mot de passe invalide ou compte utilisateur non vérifié.</h3>
                                 {% endif %}
                                 {{ form.email_or_id }}
                                 {{ form.password }}
