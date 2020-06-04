@@ -12,7 +12,7 @@ $(document).ready(function () {
     inputEmail.after("<p class='mb-3'><small class='text-muted'>Merci de renseigner une adresse email valide.</small></p>");
     inputEmail.addClass('mb-1');
     inputPwd.attr('minlength', '8');
-    inputPwd.after("<p class='mb-3'><small class='text-muted'>Le mot de passe doit faire au minimum 8 character.</small></p>");
+    inputPwd.after("<p class='mb-3'><small class='text-muted'>Le mot de passe doit faire au minimum 8 characters.</small></p>");
     inputPwd.addClass('mb-1');
     document.getElementById('id_first_name').required = true;
     document.getElementById('id_last_name').required = true;

@@ -93,9 +93,15 @@
                                     <div class="input-group form-group-edit">
                                         <input class="form-control" type="text" name="pseudo" maxlength="30" id="id_pseudo" value="{{ user.username }}">
                                     </div>
-                                    <div class="input-group form-group-edit">
-                                        <input class="form-control" type="email" name="email" id="id_email" value="{{ user.email }}">
+                                    <div class="input-group form-group-edit d-flex flex-column">
+                                        <input class="form-control w-100" type="email" name="email" id="id_email" value="{{ user.email }}">
+                                        <p class="m-0 ml-2">
+                                            <small class="text-muted">
+                                                Merci de renseigner une adresse email valide.
+                                            </small>
+                                        </p>
                                     </div>
+                                    
                                     <div class="input-group form-group-edit">
                                         <input class="form-control"  type="text" name="phone_number" pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" maxlength="10" id="id_phone_number" value="0{{ user.phone_number }}">
                                     </div>
@@ -123,12 +129,17 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-6 col-lg-5 pr-0 part-left">
-                                    <p class="lead size-edit-first" id="passwd"><strong>Nouveau mot de passe</strong></p>
-                                    <p class="lead size-edit" id="confirmPasswd"><strong>Confirmez votre mot de passe</strong></p>
+                                    <p class="lead size-edit-pwd-f" id="passwd"><strong>Nouveau mot de passe</strong></p>
+                                    <p class="lead size-edit-pwd" id="confirmPasswd"><strong>Confirmez votre mot de passe</strong></p>
                                 </div>
                                 <div class="col-6 col-lg-7 pl-0 part-right" id="contentUserInfos">
-                                    <div class="input-group form-group-edit">
-                                        <input class="form-control" type="password" name="pwd" maxlength="30" id="id_pawd">
+                                    <div class="input-group form-group-edit d-flex flex-column">
+                                        <input class="form-control w-100" type="password" name="pwd" maxlength="30" id="id_pwd">
+                                        <p class="m-0 ml-2">
+                                            <small class="text-muted">
+                                                Le mot de passe doit faire au minimum 8 characters.
+                                            </small>
+                                        </p>
                                     </div>
                                     <div class="input-group form-group-edit">
                                         <input class="form-control" type="password" name="confirm_pwd" maxlength="30" id="id_confirm_pwd">
@@ -203,4 +214,5 @@
 {% endblock content %}
 {% block script %}
 <script src="{% static 'useraccount/js/edituserinfos.js' %}"></script>
+<script src="{% static 'useraccount/js/newpwd.js' %}"></script>
 {% endblock script %}

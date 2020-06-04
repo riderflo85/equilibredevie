@@ -12,6 +12,8 @@ $(document).ready(function () {
             for (const el of prependInfos) {
                 if (count === 0) {
                     el.classList.add('size-edit-first');
+                } else if (count === 4) {
+                    el.classList.add('mb-5', 'mmt-4');
                 } else if (count === 5) {
                     el.classList.add('d-none');
                 } else {
@@ -35,6 +37,8 @@ $(document).ready(function () {
             for (const el of prependInfos) {
                 if (count === 0) {
                     el.classList.remove('size-edit-first');
+                } else if (count === 4) {
+                    el.classList.remove('mb-5', 'mmt-4', 'size-edit');
                 } else if (count === 5) {
                     el.classList.remove('d-none');
                 } else {

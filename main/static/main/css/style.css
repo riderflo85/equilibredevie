@@ -9873,6 +9873,16 @@ input.cart-plus-minus-box::-o-outer-spin-button {
 .size-edit {
     margin: 1.8rem 0;
 }
+.size-edit-pwd-f {
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+.size-edit-pwd {
+    margin: 3.1rem 0;
+}
+.mmt-4 {
+    margin-top: 2rem;
+}
 .detail-cmd td {
     vertical-align: middle !important;
 }
