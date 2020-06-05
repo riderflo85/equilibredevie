@@ -82,6 +82,29 @@ def change_pwd(request):
             return JsonResponse({'success': True})
         except:
             return JsonResponse({'success': False})
-    
+
+    else:
+        return redirect('useraccount:account')
+
+@login_required
+def change_user_infos(request):
+    if request.method == 'POST':
+        user = request.user
+        data = request.POST
+
+        try:
+            user.first_name = data['id_first_name']
+            user.last_name = data['id_last_name']
+            user.username = data['id_pseudo']
+            user.email = data['id_email']
+            user.phone_number = data['id_phone_number']
+            user.adress = data['id_adress']
+            user.postal_code = data['id_postal_code']
+            user.city = data['id_city'].upper()
+            user.save()
+            return JsonResponse({'success': True})
+        except:
+            return JsonResponse({'success': False})
+
     else:
         return redirect('useraccount:account')

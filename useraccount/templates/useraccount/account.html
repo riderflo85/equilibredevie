@@ -37,6 +37,12 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
+<div class="alert alert-danger fade pos-alert" role="alert" id="alertErrorForm">
+    <strong>Une erreur est survenu !</strong> Merci de vérifier le formulaire avant validation.
+    <button type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 <div class="container-fluid user-infos-block size-block">
     <div class="row size-block">
         <div class="col-4 col-lg-3 offset-lg-1 mr-5 tab-link-menu">
@@ -106,7 +112,7 @@
                                 </div>
                                 <div class="col-6 part-right" id="contentFormUserInfos" style="display: none;">
                                     <div class="input-group form-group-edit">
-                                        <input class="form-control" type="text" name="civility" maxlength="30" id="id_civility" value="{{ user.civility }}">
+                                        <input class="form-control" type="text" name="civility" maxlength="30" id="id_civility" value="{{ user.civility }}" disabled>
                                     </div>
                                     <div class="input-group form-group-edit">
                                         <input class="form-control" type="text" name="last_name" maxlength="30" id="id_last_name" value="{{ user.last_name }}">

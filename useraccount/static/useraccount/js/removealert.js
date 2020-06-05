@@ -3,7 +3,8 @@ $(document).ready(function () {
         'alertChangePwd',
         'alertFailChangePwd',
         'alertChangeUserInfos',
-        'alertFailChangeUserInfos'
+        'alertFailChangeUserInfos',
+        'alertErrorForm'
     ]
 
     for (const alert of alerts) {
