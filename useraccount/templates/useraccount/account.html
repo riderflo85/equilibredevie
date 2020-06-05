@@ -172,7 +172,7 @@
                             </div>
                         </div>
                         <div class="pos-btn d-flex">
-                            <button type="button" class="btn-user-account btn-hover ml-2" id="confirmInfosUser">Valider <i class="fas fa-check"></i></button>
+                            <button type="button" class="btn-user-account btn-hover ml-2" id="changePwd">Valider <i class="fas fa-check"></i></button>
                         </div>
                     </div>
                 </div>
@@ -237,6 +237,8 @@
 
 {% endblock content %}
 {% block script %}
+<script src="{% static 'cart/js/secureajax.js' %}"></script>
+<script src="{% static 'useraccount/js/removealert.js' %}"></script>
 <script src="{% static 'useraccount/js/edituserinfos.js' %}"></script>
 <script src="{% static 'useraccount/js/newpwd.js' %}"></script>
 {% endblock script %}
