@@ -9886,3 +9886,10 @@ input.cart-plus-minus-box::-o-outer-spin-button {
 .detail-cmd td {
     vertical-align: middle !important;
 }
+.pos-alert {
+    position: absolute;
+    width: 100%;
+}
+.close:hover {
+    cursor: pointer;
+}

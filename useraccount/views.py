@@ -1,4 +1,4 @@
-# from django.contrib.auth.decorators import 
+from django.http import JsonResponse 
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -31,7 +31,6 @@ def login_user(request):
     context['form'] = form
 
     return render(request, 'useraccount/login.html', context)
-
 
 def register(request):
     context = {}
@@ -72,3 +71,17 @@ def register(request):
 @login_required
 def account(request):
     return render(request, 'useraccount/account.html')
+
+@login_required
+def change_pwd(request):
+    if request.method == 'POST':
+        user = request.user
+        try:
+            user.set_password(request.POST['new_pwd'])
+            user.save()
+            return JsonResponse({'success': True})
+        except:
+            return JsonResponse({'success': False})
+    
+    else:
+        return redirect('useraccount:account')
