@@ -1,4 +1,5 @@
 from django.test import TestCase, Client
+from django.contrib.auth.hashers import check_password
 from .models import User
 from .forms import LoginForm, RegisterForm
 
@@ -142,3 +143,42 @@ class UserActionTestCase(TestCase):
 
         self.assertEqual(rep.context['error'], 'mot de passe non identique')
         self.assertEqual(rep.status_code, 200)
+
+
+class ManageUserAccountTestCase(TestCase):
+    def setUp(self):
+        self.cli = Client()
+        self.user = User.objects.create_user(
+            'TestPseudoNo',
+            'simpletester@tester.com',
+            'testUserPassword!',
+            civility='Mme',
+            first_name='FNTestFirstName',
+            last_name='LNTestLastName',
+            phone_number=1723456789,
+            adress='134 Rue De Paris',
+            postal_code=75000,
+            city='Paris',
+        )
+        self.cli.force_login(self.user)
+
+    def test_change_user_password(self):
+        rep1 = self.cli.get("/user/change_pwd/")
+        self.assertEqual(rep1.status_code, 302)
+
+        rep2 = self.cli.post("/user/change_pwd/", {
+            "new_pwd": "myNewPassword"
+        })
+
+        user_new_pwd = User.objects.get(username=self.user.username).password
+        check_pwd = check_password('myNewPassword', user_new_pwd)
+
+        self.assertTrue(rep2.json()['success'])
+        self.assertTrue(check_pwd)
+
+    def test_fail_change_user_password(self):
+        rep = self.cli.post("/user/change_pwd/", {
+            "new_fail": "fail"
+        })
+
+        self.assertFalse(rep.json()['success'])
