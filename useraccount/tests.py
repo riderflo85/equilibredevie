@@ -1,5 +1,6 @@
 from django.test import TestCase, Client
 from django.contrib.auth.hashers import check_password
+from senderemail.register import sender_activate_account
 from .models import User
 from .forms import LoginForm, RegisterForm
 
@@ -51,6 +52,12 @@ class FormTestCase(TestCase):
         user.save()
         self.assertTrue(is_valid)
         self.assertEqual(User.objects.get(id=user.id).username, user.username)
+
+    def test_sender_email_validate_account(self):
+        self.user.generate_activate_key()
+        rep = sender_activate_account(self.user, '127.0.0.1:8000')
+
+        self.assertEqual(rep.status_code, 202)
 
     def test_form_login(self):
         data1 = {'email_or_id': self.user.username,

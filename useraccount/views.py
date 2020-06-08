@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from senderemail.register import sender_activate_account
 from .forms import LoginForm, RegisterForm
 from .models import User
 
@@ -53,6 +54,9 @@ def register(request):
                     city=form.cleaned_data['city'],
                 )
                 user.save()
+                user.generate_activate_key()
+                sender_activate_account(user, request.get_host())
+
                 return redirect('main:index')
 
             else:
