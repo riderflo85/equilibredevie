@@ -151,6 +151,22 @@ class UserActionTestCase(TestCase):
         self.assertEqual(rep.context['error'], 'mot de passe non identique')
         self.assertEqual(rep.status_code, 200)
 
+    def test_activate_user_account(self):
+        self.user.generate_activate_key()
+        rep = self.cli.get(f"/user/active_account?id={self.user.pk}&key={self.user.activate_key}")
+
+        self.assertEqual(rep.status_code, 200)
+        self.assertTrue(rep.context['is_validate'])
+        self.assertTrue(User.objects.get(pk=self.user.pk).is_verified)
+
+    def test_fail_activate_user_account(self):
+        self.user.generate_activate_key()
+        rep = self.cli.get(f"/user/active_account?id={self.user.pk}&key=fail_key")
+
+        self.assertEqual(rep.status_code, 200)
+        self.assertFalse(rep.context['is_validate'])
+        self.assertFalse(User.objects.get(pk=self.user.pk).is_verified)
+
 
 class ManageUserAccountTestCase(TestCase):
     def setUp(self):

@@ -112,3 +112,19 @@ def change_user_infos(request):
 
     else:
         return redirect('useraccount:account')
+
+def active_account(request):
+    context = {}
+    id_user = request.GET['id']
+    key = request.GET['key']
+    user = User.objects.get(pk=id_user)
+
+    if user.activate_key == key:
+        user.is_verified = True
+        user.save()
+        context['is_validate'] = True
+
+    else:
+        context['is_validate'] = False
+
+    return render(request, 'useraccount/activated.html', context)
