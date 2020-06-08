@@ -27,13 +27,20 @@
                                 {% if error %}
                                 <h3 class="text-warning">Utilisateur incorrect, mot de passe invalide ou compte utilisateur non vérifié.</h3>
                                 {% endif %}
+                                {% if user.is_authenticated %}
+                                <h3 class="text-warning">Vous êtes déjà connecté {{ user }}.</h3>
+                                {% endif %}
                                 {{ form.email_or_id }}
                                 {{ form.password }}
                                 <div class="button-box">
                                     <div class="login-toggle-btn">
                                         <a href="#">Mot de passe oublié ?</a>
                                     </div>
+                                    {% if user.is_authenticated %}
+                                    <button type="submit" class="furits-slider-btn btn-hover animated floatright" disabled>S'identifier</button>
+                                    {% else %}
                                     <button type="submit" class="furits-slider-btn btn-hover animated floatright">S'identifier</button>
+                                    {% endif %}
                                 </div>
                             </form>
                         </div>
