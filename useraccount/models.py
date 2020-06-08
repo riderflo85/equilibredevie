@@ -1,3 +1,4 @@
+import random, string
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
@@ -43,7 +44,22 @@ class User(AbstractUser):
         default=False,
         verbose_name='Compte vérifié'
     )
+    activate_key = models.CharField(
+        max_length=48,
+        blank=True,
+        verbose_name="Clé de vérification d'email"
+    )
     order = models.ManyToManyField(Order)
 
     def __str__(self):
         return f"{self.civility} {self.last_name} {self.first_name}"
+
+    def generate_activate_key(self):
+        """
+        Create a random key for check the user email.
+        """
+
+        for_key = string.ascii_letters + string.digits
+
+        self.activate_key = "".join(random.choice(for_key) for _ in range(48))
+        self.save()
