@@ -1,3 +1,5 @@
+import os
+from unittest.mock import patch
 from django.test import TestCase
 from useraccount.models import User
 from order.models import Order, OrderProductQuantity
@@ -42,7 +44,7 @@ class SendEmailTest(TestCase):
             city="Challans",
             dep="vendée",
             phone_number=789651420,
-            email="florent@gmail.com",
+            email="florentfaketest@gmail.com",
             url_receipt="https://url_de_recu_de_commande.com",
             total_price=12.22,
             note=' ',
@@ -56,6 +58,7 @@ class SendEmailTest(TestCase):
         res = order_receipt.sender_validation_cmd_client(order, self.user)
         self.assertEqual(res.status_code, 202)
 
+    @patch.dict('os.environ', {'OWNER_EMAIL': 'faketest@gmail.com'})
     def test_send_email_new_cmd(self):
         order = Order.objects.create(
             reference="21052020172922666298",
@@ -79,3 +82,4 @@ class SendEmailTest(TestCase):
         )
         res = new_command.sender_alert_new_cmd(order, self.user)
         self.assertEqual(res.status_code, 202)
+        self.assertEqual(os.environ.get('OWNER_EMAIL'), 'faketest@gmail.com')
