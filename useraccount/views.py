@@ -137,15 +137,18 @@ def forgot_password(request):
 
         if form.is_valid():
             data = form.cleaned_data
-            user = get_object_or_404(User, email=data['email'])
+            try:
+                user = User.object.get(email=data['email'])
 
-            if int(data['phone_number']) == user.phone_number:
-                user.generate_check_code_reset_password()
-                response = sender_reset_password(user, request.get_host())
-                return redirect('useraccount:reset_password')
+                if int(data['phone_number']) == user.phone_number:
+                    user.generate_check_code_reset_password()
+                    response = sender_reset_password(user, request.get_host())
+                    return redirect('useraccount:reset_password')
 
-            else:
-                context['error'] = "Numéro de téléphone non correspondant avec l'adresse email."
+                else:
+                    context['error'] = "Numéro de téléphone non correspondant avec l'adresse email."
+            except:
+                context['error'] = "L'adresse email ne correspond a aucun compte client."
         
         else:
             context['error'] = "Le formulaire n'est pas valide, merci de vérifier les champs."
