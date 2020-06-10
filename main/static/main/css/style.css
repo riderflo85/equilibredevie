@@ -9893,3 +9893,6 @@ input.cart-plus-minus-box::-o-outer-spin-button {
 .close:hover {
     cursor: pointer;
 }
+.text-error {
+    color: #ce1115;
+}

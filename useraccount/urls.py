@@ -16,4 +16,11 @@ urlpatterns = [
     path('change_pwd/', views.change_pwd, name="change_password"),
     path('change_infos/', views.change_user_infos, name="change_infos"),
     path('active_account', views.active_account, name="activation"),
+    path('forgot_password/', views.forgot_password, name="forgot_password"),
+    path('reset_password/', views.reset_password, name="reset_password"),
+    path(
+        'success_reset_pwd/',
+        views.success_reset_pwd,
+        name="success_reset_pwd"
+    ),
 ]

@@ -1,8 +1,9 @@
 from django.test import TestCase, Client
 from django.contrib.auth.hashers import check_password
 from senderemail.register import sender_activate_account
+from senderemail.reset_password import sender_reset_password
 from .models import User
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, ForgotPasswordForm
 
 
 class FormTestCase(TestCase):
@@ -67,6 +68,15 @@ class FormTestCase(TestCase):
 
         self.assertTrue(LoginForm(data1).is_valid())
         self.assertTrue(LoginForm(data2).is_valid())
+
+    def test_form_forgot_password(self):
+        data = {
+            'email': self.user.email,
+            'phone_number': self.user.phone_number
+        }
+        form = ForgotPasswordForm(data)
+
+        self.assertTrue(form.is_valid())
 
 
 class UserActionTestCase(TestCase):
@@ -153,7 +163,9 @@ class UserActionTestCase(TestCase):
 
     def test_activate_user_account(self):
         self.user.generate_activate_key()
-        rep = self.cli.get(f"/user/active_account?id={self.user.pk}&key={self.user.activate_key}")
+        rep = self.cli.get(
+            f"/user/active_account?id={self.user.pk}&key={self.user.activate_key}"
+        )
 
         self.assertEqual(rep.status_code, 200)
         self.assertTrue(rep.context['is_validate'])
@@ -166,6 +178,100 @@ class UserActionTestCase(TestCase):
         self.assertEqual(rep.status_code, 200)
         self.assertFalse(rep.context['is_validate'])
         self.assertFalse(User.objects.get(pk=self.user.pk).is_verified)
+
+    def test_forgot_user_password(self):
+        data = {
+            'email': self.user.email,
+            'phone_number': self.user.phone_number
+        }
+        rep = self.cli.post('/user/forgot_password/', data)
+
+        self.assertEqual(rep.status_code, 302)
+        self.assertRedirects(rep, '/user/reset_password/')
+
+    def test_fail_phone_number_forgot_user_password(self):
+        data = {
+            'email': self.user.email,
+            'phone_number': 1122115444
+        }
+        rep = self.cli.post('/user/forgot_password/', data)
+
+        self.assertEqual(rep.status_code, 200)
+        self.assertEqual(
+            rep.context['error'],
+            "Numéro de téléphone non correspondant avec l'adresse email."
+        )
+
+    def test_fail_form_forgot_user_password(self):
+        data = {
+            'email': "unvalid.email?com",
+            'phone_number': 114554788525
+        }
+        rep = self.cli.post('/user/forgot_password/', data)
+
+        self.assertEqual(rep.status_code, 200)
+        self.assertEqual(
+            rep.context['error'],
+            "Le formulaire n'est pas valide, merci de vérifier les champs."
+        )
+
+    def test_reset_user_password(self):
+        self.user.generate_check_code_reset_password()
+        
+        data = {
+            'code': self.user.check_code,
+            'password': 'NewPasswordForReset',
+            'confirm_password': 'NewPasswordForReset'
+        }
+        rep = self.cli.post('/user/reset_password/', data)
+
+        self.assertEqual(rep.status_code, 302)
+        self.assertRedirects(rep, '/user/success_reset_pwd/')
+
+    def test_fail_reset_user_password(self):
+        self.user.generate_check_code_reset_password()
+        
+        data = {
+            'code': self.user.check_code,
+            'password': 'NewPasswordForReset',
+            'confirm_password': 'NewErrorPasswordForReset'
+        }
+        rep = self.cli.post('/user/reset_password/', data)
+
+        self.assertEqual(rep.status_code, 200)
+        self.assertEqual(rep.context['error'], 'Les mots de passe ne sont pas égaux.')
+
+    def test_fail_form_reset_user_password(self):
+        self.user.generate_check_code_reset_password()
+        
+        data = {
+            'code': self.user.check_code,
+            'password': 'pass',
+            'confirm_password': 'pass'
+        }
+        rep = self.cli.post('/user/reset_password/', data)
+
+        self.assertEqual(rep.status_code, 200)
+        self.assertEqual(rep.context['error'], "Le formulaire n'est pas valide.")
+
+    def test_fail_check_code_reset_user_password(self):
+        self.user.generate_check_code_reset_password()
+        
+        data = {
+            'code': 'fakeCode7',
+            'password': 'NewPasswordForReset',
+            'confirm_password': 'NewPasswordForReset'
+        }
+        rep = self.cli.post('/user/reset_password/', data)
+
+        self.assertEqual(rep.status_code, 200)
+        self.assertEqual(rep.context['error'], "Le code de vérification n'est pas valide.")
+
+    def test_sender_reset_password(self):
+        self.user.generate_check_code_reset_password()
+        rep = sender_reset_password(self.user, "127.0.0.1:8000/user/reset_password/")
+
+        self.assertEqual(rep.status_code, 202)
 
 
 class ManageUserAccountTestCase(TestCase):

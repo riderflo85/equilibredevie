@@ -49,6 +49,11 @@ class User(AbstractUser):
         blank=True,
         verbose_name="Clé de vérification d'email"
     )
+    check_code = models.CharField(
+        max_length=10,
+        default="nill",
+        verbose_name="Code de réinitialisation de mot de passe"
+    )
     order = models.ManyToManyField(Order)
 
     def __str__(self):
@@ -62,4 +67,14 @@ class User(AbstractUser):
         for_key = string.ascii_letters + string.digits
 
         self.activate_key = "".join(random.choice(for_key) for _ in range(48))
+        self.save()
+
+    def generate_check_code_reset_password(self):
+        """
+        Create a random code for the user can change his password.
+        """
+
+        code = string.ascii_uppercase + string.digits
+
+        self.check_code = "".join(random.choice(code) for _ in range(10))
         self.save()

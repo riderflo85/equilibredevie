@@ -1,9 +1,10 @@
 from django.http import JsonResponse 
 from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from senderemail.register import sender_activate_account
-from .forms import LoginForm, RegisterForm
+from senderemail.reset_password import sender_reset_password
+from .forms import LoginForm, RegisterForm, ForgotPasswordForm, ResetPasswordForm
 from .models import User
 
 
@@ -128,3 +129,66 @@ def active_account(request):
         context['is_validate'] = False
 
     return render(request, 'useraccount/activated.html', context)
+
+def forgot_password(request):
+    context = {}
+    if request.method == 'POST':
+        form = ForgotPasswordForm(request.POST)
+
+        if form.is_valid():
+            data = form.cleaned_data
+            user = get_object_or_404(User, email=data['email'])
+
+            if int(data['phone_number']) == user.phone_number:
+                user.generate_check_code_reset_password()
+                response = sender_reset_password(user, request.get_host())
+                return redirect('useraccount:reset_password')
+
+            else:
+                context['error'] = "Numéro de téléphone non correspondant avec l'adresse email."
+        
+        else:
+            context['error'] = "Le formulaire n'est pas valide, merci de vérifier les champs."
+
+    else:
+        form = ForgotPasswordForm()
+        
+    context['form'] = form
+
+    return render(request, 'useraccount/forgotpassword.html', context)
+
+def reset_password(request):
+    context = {}
+
+    if request.method == 'POST':
+        form = ResetPasswordForm(request.POST)
+
+        if form.is_valid():
+            data = form.cleaned_data
+            try:
+                user = User.objects.get(check_code=data['code'])
+
+                if data['password'] == data['confirm_password']:
+                    user.set_password(data['password'])
+                    user.check_code = "nill"
+                    user.save()
+
+                    return redirect('useraccount:success_reset_pwd')
+
+                else:
+                    context['error'] = "Les mots de passe ne sont pas égaux."
+            except:
+                context['error'] = "Le code de vérification n'est pas valide."
+        
+        else:
+            context['error'] = "Le formulaire n'est pas valide."
+    
+    else:
+        form = ResetPasswordForm()
+    
+    context['form'] = form
+
+    return render(request, 'useraccount/resetpassword.html', context)
+
+def success_reset_pwd(request):
+    return render(request, 'useraccount/successresetpassword.html')
