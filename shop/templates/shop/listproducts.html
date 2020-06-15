@@ -22,11 +22,15 @@
                     <div class="sidebar-widget mb-50">
                         <h3 class="sidebar-title">Chercher un produit</h3>
                         <div class="sidebar-search">
-                            <form action="#">
-                                <input placeholder="Trouver un produit..." type="text">
+                            <form action="." method="post">
+                                {% csrf_token %}
+                                {{ search_form.search_product }}
                                 <button><i class="ti-search"></i></button>
                             </form>
                         </div>
+                        {% if matched %}
+                        <p class="mt-2 ml-1 color-blue-1"><a href="{% url 'shop:shop' %}">Afficher tout les produits.</a></p>
+                        {% endif %}
                     </div>
                     <div class="sidebar-widget mb-45">
                         <h3 class="sidebar-title">Categories</h3>
@@ -46,7 +50,7 @@
                         <div class="shop-bar pb-60">
                             <div class="shop-found-selector">
                                 <div class="shop-found">
-                                    <p><span>23</span> Product Found of <span>50</span></p>
+                                    <p><span>{{ object_list|length }}</span> Produits trouvés <span></p>
                                 </div>
                                 <div class="shop-selector">
                                     <label>Trier par : </label>
@@ -57,6 +61,7 @@
                                         <option value="">Prix ++</option>
                                         <option value="">Prix --</option>
                                     </select>
+                                    <button type='button' class="btn btn-valide-filter"><i class="text-success fas fa-check-square fa-2x"></i></button>
                                 </div>
                             </div>
                             <div class="shop-filter-tab">

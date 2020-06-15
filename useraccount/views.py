@@ -138,7 +138,7 @@ def forgot_password(request):
         if form.is_valid():
             data = form.cleaned_data
             try:
-                user = User.object.get(email=data['email'])
+                user = User.objects.get(email=data['email'])
 
                 if int(data['phone_number']) == user.phone_number:
                     user.generate_check_code_reset_password()

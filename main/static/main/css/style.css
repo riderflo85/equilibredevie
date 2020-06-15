@@ -4802,7 +4802,7 @@ a.icon-cart-furniture span.green {
     display: flex;
 }
 .sidebar-search form > button:hover {
-    background-color: #050035;
+    background-color: #3751c8;
     color: #fff;
 }
 .sidebar-categories li a:hover,
@@ -7421,7 +7421,7 @@ h5.panel-title {
     font-size: 18px;
     height: inherit;
     line-height: 1;
-    padding-left: 0;
+    padding-left: 5px;
     width: 113px;
 }
 .shop-tab a {
@@ -9895,4 +9895,18 @@ input.cart-plus-minus-box::-o-outer-spin-button {
 }
 .text-error {
     color: #ce1115;
+}
+.color-blue-1 a {
+    color: #3751c8;
+}
+.color-blue-1 a:hover {
+    color: #00a2e8;
+}
+.btn-valide-filter {
+    background-color: transparent;
+    position: relative;
+    left: -2rem;
+}
+.btn-valide-filter:hover {
+    cursor: pointer;
 }
