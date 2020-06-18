@@ -54,14 +54,14 @@
                                 </div>
                                 <div class="shop-selector">
                                     <label>Trier par : </label>
-                                    <select name="select">
-                                        <option value="">Default</option>
-                                        <option value="">A à Z</option>
-                                        <option value=""> Z à A</option>
-                                        <option value="">Prix ++</option>
-                                        <option value="">Prix --</option>
+                                    <select name="select" id="selectFilter">
+                                        <option value="" disabled>Default</option>
+                                        <option value="a_to_z">A à Z</option>
+                                        <option value="z_to_a"> Z à A</option>
+                                        <option value="price_decreasing">Prix ++</option>
+                                        <option value="price_increasing">Prix --</option>
                                     </select>
-                                    <button type='button' class="btn btn-valide-filter"><i class="text-success fas fa-check-square fa-2x"></i></button>
+                                    <button type='button' class="btn btn-valide-filter" id="btnValidFilter"><i class="text-success fas fa-check-square fa-2x"></i></button>
                                 </div>
                             </div>
                             <div class="shop-filter-tab">
@@ -75,9 +75,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="shop-product-content tab-content">
+                        <div class="shop-product-content tab-content" id="wrapper">
+                            <div class="d-flex justify-content-center">
+                                <div class="spinner-border loading-spinner" id="spinner" role="status">
+                                    <span class="sr-only">Chargement en cours...</span>
+                                </div>
+                            </div>
                             <div id="grid-sidebar3" class="tab-pane fade active show">
-                                <div class="row">
+                                <div class="row" id="allProducts">
                                     {% for product in object_list %}
                                     <div class="col-md-6 col-xl-4">
                                         <div class="product-wrapper mb-30">
@@ -101,8 +106,8 @@
                                                 </form>
                                             </div>
                                             <div class="product-content">
-                                                <h4><a href="{{ product.get_absolute_url }}"> {{ product.name }} </a></h4>
-                                                <span>{{ product.price }}€</span>
+                                                <h4><a href="{{ product.get_absolute_url }}" class="name-product">{{ product.name }}</a></h4>
+                                                <span class="price-product">{{ product.price }}€</span>
                                             </div>
                                         </div>
                                     </div>
@@ -112,7 +117,7 @@
                                 </div>
                             </div>
                             <div id="grid-sidebar4" class="tab-pane fade">
-                                <div class="row">
+                                <div class="row" id="allProductsPanelStyle">
                                     {% for product in object_list %}
                                     <div class="col-lg-12 col-xl-6">
                                         <div class="product-wrapper mb-30 single-product-list product-list-right-pr mb-60">
@@ -128,8 +133,8 @@
                                             </div>
                                             <div class="product-content-list">
                                                 <div class="product-list-info">
-                                                    <h4><a href="{{ product.get_absolute_url }}"> {{ product.name }} </a></h4>
-                                                    <span>{{ product.price }}€</span>
+                                                    <h4><a href="{{ product.get_absolute_url }}" class="name-product"> {{ product.name }} </a></h4>
+                                                    <span class="price-product">{{ product.price }}€</span>
                                                     <p>{{ product.description }}</p>
                                                 </div>
                                                 <div class="product-list-cart-wishlist ml-3">
@@ -253,4 +258,5 @@
 
 {% block script %}
 <script src="{% static 'shop/js/hiddenform.js' %}"></script>
+<script src="{% static 'shop/js/filterproduct.js' %}"></script>
 {% endblock script %}

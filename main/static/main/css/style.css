@@ -9910,3 +9910,9 @@ input.cart-plus-minus-box::-o-outer-spin-button {
 .btn-valide-filter:hover {
     cursor: pointer;
 }
+.loading-spinner {
+    width: 4rem;
+    height: 4rem;
+    color: #ce1115;
+    display: none;
+}
