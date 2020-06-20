@@ -54,15 +54,11 @@
                                     <p class="ml-5">Page <span>{{ page_obj.number }}</span> sur <span>{{ page_obj.paginator.num_pages }}</span></p>
                                 </div>
                                 <div class="shop-selector">
-                                    <label>Trier par : </label>
-                                    <select name="select" id="selectFilter">
-                                        <option value="" disabled>Default</option>
-                                        <option value="a_to_z">A à Z</option>
-                                        <option value="z_to_a"> Z à A</option>
-                                        <option value="price_decreasing">Prix ++</option>
-                                        <option value="price_increasing">Prix --</option>
-                                    </select>
-                                    <button type='button' class="btn btn-valide-filter" id="btnValidFilter"><i class="text-success fas fa-check-square fa-2x"></i></button>
+                                    <form action="." type="get">
+                                        {% csrf_token %}
+                                        {{ filter_form }}
+                                        <button type='submit' class="btn btn-valide-filter" id="btnValidFilter"><i class="text-success fas fa-check-square fa-2x"></i></button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="shop-filter-tab">
@@ -162,6 +158,27 @@
                 </div>
                 <div class="pagination-style mt-50 text-center">
                     <span>Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}</span>
+
+                    <!-- If the user has filtered the products -->
+                    {% if filter %}
+                    <ul class="mt-3">
+                        {% if page_obj.has_previous %}
+                            <li><a href="?page={{ page_obj.previous_page_number }}&filter_choice={{ filter.filter_choice }}"><i class="ti-angle-left"></i></a></li>
+                        {% endif %}
+                        {% for page in number_page %}
+                            {% if page|add:1 == request.GET.page|add:0 %}
+                                <li class="active"><a href="?page={{ page|add:'1' }}&filter_choice={{ filter.filter_choice }}">{{ page|add:'1' }}</a></li>
+                            {% else %}
+                                <li><a href="?page={{ page|add:'1' }}&filter_choice={{ filter.filter_choice }}">{{ page|add:'1' }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <li><a href="?page={{ page_obj.next_page_number }}&filter_choice={{ filter.filter_choice }}"><i class="ti-angle-right"></i></a></li>
+                        {% endif %}
+                    </ul>
+
+                    <!-- If the user does not filter the products -->
+                    {% else %}
                     <ul class="mt-3">
                         {% if page_obj.has_previous %}
                             <li><a href="?page={{ page_obj.previous_page_number }}"><i class="ti-angle-left"></i></a></li>
@@ -177,6 +194,7 @@
                             <li><a href="?page={{ page_obj.next_page_number }}"><i class="ti-angle-right"></i></a></li>
                         {% endif %}
                     </ul>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -225,25 +243,6 @@
                             <span class="new">{{ product.price }}€</span>
                         </div>
                         <p>{{ product.description }}</p>
-                        {% comment %} <div class="quick-view-select">
-                            <div class="select-option-part">
-                                <label>Size*</label>
-                                <select class="select">
-                                    <option value="">- Please Select -</option>
-                                    <option value="">900</option>
-                                    <option value="">700</option>
-                                </select>
-                            </div>
-                            <div class="select-option-part">
-                                <label>Color*</label>
-                                <select class="select">
-                                    <option value="">- Please Select -</option>
-                                    <option value="">orange</option>
-                                    <option value="">pink</option>
-                                    <option value="">yellow</option>
-                                </select>
-                            </div>
-                        </div> {% endcomment %}
                         <form action="{% url 'cart:cart_add' product.id %}" method="post">
                             {% csrf_token %}
                             <div class="quickview-plus-minus">

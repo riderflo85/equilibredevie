@@ -13,3 +13,22 @@ class SearchProductForm(forms.Form):
             attrs={'placeholder': 'Trouver un produit...'}
         ),
     )
+
+
+class FilterProductForm(forms.Form):
+    """
+    Form for the user can filter the product(s)
+    """
+
+    choices_filter = [
+        ('none', '----------'),
+        ('name', 'A à Z'),
+        ('-name', 'Z à A'),
+        ('-price', 'Prix ++'),
+        ('price', 'Prix --')
+    ]
+
+    filter_choice = forms.ChoiceField(
+        label='Trier par',
+        choices=choices_filter,
+    )
