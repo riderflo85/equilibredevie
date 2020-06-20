@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core.paginator import Paginator
 from django.views.generic.list import ListView
 from cart.forms import CartAddProductForm
 from .forms import SearchProductForm 
@@ -30,6 +31,12 @@ def list_all_products(request):
         search_form = SearchProductForm()
         all_products = Product.objects.all()
         context['object_list'] = all_products
+        
+        paginator = Paginator(all_products, 1)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        context['page_obj'] = page_obj
+        context['number_page'] = range(paginator.num_pages)
     
     context['search_form'] = search_form
     context['categories'] = Category.objects.all()
