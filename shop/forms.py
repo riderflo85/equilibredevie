@@ -32,3 +32,10 @@ class FilterProductForm(forms.Form):
         label='Trier par',
         choices=choices_filter,
     )
+    filter_categ = forms.CharField(
+        max_length=150,
+        widget=forms.TextInput(
+            attrs={'class': 'd-none'}
+        ),
+        required=False,
+    )

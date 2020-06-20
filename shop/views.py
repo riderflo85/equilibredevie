@@ -4,7 +4,7 @@ from django.views.generic.list import ListView
 from cart.forms import CartAddProductForm
 from .forms import SearchProductForm, FilterProductForm
 from .models import Product, Category
-from .utils import filter_products_by_user_choice
+from .utils import filter_products_by_user_choice, filter_products_by_categories
 
 
 def list_all_products(request):
@@ -31,14 +31,26 @@ def list_all_products(request):
     else:
         search_form = SearchProductForm()
 
+        if 'filter_categ' in request.GET.keys():
+            print("test in filter categ")
+            all_products = filter_products_by_categories(
+                request.GET['filter_categ']
+            )
+            context['category'] = request.GET['filter_categ']
+
+        else:
+            all_products = Product.objects.all()
+
         if 'filter_choice' in request.GET.keys():
+            print('test in filter choice')
             data = {'filter_choice': request.GET['filter_choice']}
             filter_form = FilterProductForm(data)
-            all_products = filter_products_by_user_choice(filter_form)
+            all_products = filter_products_by_user_choice(
+                filter_form, all_products)
             context['filter'] = data
+
         else:
             filter_form = FilterProductForm()
-            all_products = Product.objects.all()
 
         if all_products != "error":
             paginator = Paginator(all_products, 1)
