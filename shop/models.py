@@ -110,10 +110,14 @@ class Product(models.Model):
 
 
 class ShippingCosts(models.Model):
-    min_weight = models.PositiveIntegerField(
+    min_weight = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
         verbose_name="Poids minimum pour frais de port"
     )
-    max_weight = models.PositiveIntegerField(
+    max_weight = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
         verbose_name="Poids maximum pour frais de port"
     )
     price = models.DecimalField(
@@ -121,3 +125,10 @@ class ShippingCosts(models.Model):
         decimal_places=2,
         verbose_name="Prix de frais de port TTC"
     )
+
+    class Meta:
+        verbose_name = "Frais de port"
+
+        def __str__(self):
+                return f"De {self.min_weight} à {max_weight}, \
+                    les frais de port sont de {self.price}"
