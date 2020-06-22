@@ -17,6 +17,7 @@ class OrderAdmin(admin.ModelAdmin):
         'created',
         'updated',
         'paid',
+        'status',
         'receipt_send',
         'validate_order_send',
         'invoice_send',
