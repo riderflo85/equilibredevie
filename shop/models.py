@@ -78,6 +78,9 @@ class Product(models.Model):
     price = models.DecimalField(
         max_digits=10, decimal_places=2, verbose_name="Prix TTC"
     )
+    weight = models.PositiveIntegerField(
+        verbose_name="Poids en Kilos"
+    )
     available = models.BooleanField(
         default=True, verbose_name="Rendre publique"
     )
@@ -90,7 +93,7 @@ class Product(models.Model):
         auto_now_add=True, verbose_name="Créer le"
     )
     updated = models.DateTimeField(
-        auto_now=True, verbose_name="Mis à jour la"
+        auto_now=True, verbose_name="Mis à jour le"
     )
 
     class Meta:
@@ -106,3 +109,15 @@ class Product(models.Model):
         return reverse('shop:product_detail', args=[self.id])
 
 
+class ShippingCosts(models.Model):
+    min_weight = models.PositiveIntegerField(
+        verbose_name="Poids minimum pour frais de port"
+    )
+    max_weight = models.PositiveIntegerField(
+        verbose_name="Poids maximum pour frais de port"
+    )
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        verbose_name="Prix de frais de port TTC"
+    )
