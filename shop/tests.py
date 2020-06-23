@@ -30,6 +30,7 @@ class SendEmailTest(TestCase):
             name='test bicar',
             slug='test_bicar',
             price=12.22,
+            weight=9.00,
             available=True,
             priority='1',
         )
@@ -47,6 +48,8 @@ class SendEmailTest(TestCase):
             email="florentfaketest@gmail.com",
             url_receipt="https://url_de_recu_de_commande.com",
             total_price=12.22,
+            shipping_costs=6.00,
+            subtotal_price=12.22-6.00,
             note=' ',
         )
         OrderProductQuantity.objects.create(
@@ -72,6 +75,8 @@ class SendEmailTest(TestCase):
             email="florent@gmail.com",
             url_receipt="https://url_de_recu_de_commande.com",
             total_price=12.22,
+            shipping_costs=6.00,
+            subtotal_price=12.22-6.00,
             note=' ',
         )
         OrderProductQuantity.objects.create(
