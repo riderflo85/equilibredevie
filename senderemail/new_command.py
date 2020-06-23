@@ -22,6 +22,7 @@ def sender_alert_new_cmd(order, user):
             "anotheradress": {},
             "note": order.note,
             "date": f"{date_cmd[2]}/{date_cmd[1]}/{date_cmd[0]}",
+            "subtotalprice": str(order.total_price - order.shipping_costs),
             "totalprice": str(order.total_price),
             "shippingcosts": str(order.shipping_costs),
             "products": []
@@ -30,7 +31,7 @@ def sender_alert_new_cmd(order, user):
 
     if order.another_delivery_adress:
         data['cmd']['anotheradress'] = {
-            "ifyes": "true",
+            "ifyes": True,
             "nameclient": f"{order.last_name.upper()} {order.first_name}",
             "adress": order.adress,
             "postalcode": str(order.postal_code),
@@ -40,7 +41,7 @@ def sender_alert_new_cmd(order, user):
 
     else:
         data['cmd']['anotheradress'] = {
-            "ifyes": "false",
+            "ifyes": False,
             "nameclient": "none",
             "adress": "none",
             "postalcode": "none",

@@ -43,6 +43,7 @@ def sender_validation_cmd_client(order, user):
             "anotheradress": {},
             "note": order.note,
             "date": f"{date_cmd[2]}/{date_cmd[1]}/{date_cmd[0]}",
+            "subtotalprice": str(order.total_price - order.shipping_costs),
             "totalprice": str(order.total_price),
             "shippingcosts": str(order.shipping_costs),
             "products": []
