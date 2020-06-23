@@ -180,15 +180,15 @@
                                     </tr>
                                     <tr class="cart-subtotal">
                                         <th>Sous total</th>
-                                        <td><span class="amount">{{ cart.get_total_price }} €</span></td>
+                                        <td><span class="amount">{{ cart.get_total_price.0 }} €</span></td>
                                     </tr>
                                     <tr class="cart-subtotal">
                                         <th>Frais de port</th>
-                                        <td><span class="amount">0 €</span></td>
+                                        <td><span class="amount">{{ cart.get_shipping_costs }} €</span></td>
                                     </tr>
                                     <tr class="order-total">
                                         <th>Total de la commande</th>
-                                        <td><strong><span class="amount">{{ cart.get_total_price }} €</span></strong>
+                                        <td><strong><span class="amount">{{ cart.get_total_price.1 }} €</span></strong>
                                         </td>
                                     </tr>								
                                 </tfoot>

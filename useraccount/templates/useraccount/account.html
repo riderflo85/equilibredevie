@@ -193,6 +193,8 @@
                                         <th scope="col">Référence n° {{ order.reference }}</th>
                                         <th scope="col">Montant TTC {{ order.total_price }}€</th>
                                         {% if order.status == 'En cours de préparation' %}
+                                        <th scope="col" style="color: #3751c8;">{{ order.status }}</th>
+                                        {% elif order.status == 'Payement non abouti' %}
                                         <th scope="col" style="color: #ce1115;">{{ order.status }}</th>
                                         {% else %}
                                         <th scope="col" style="color: #578a01">{{ order.status }}</th>

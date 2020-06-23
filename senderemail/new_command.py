@@ -23,6 +23,7 @@ def sender_alert_new_cmd(order, user):
             "note": order.note,
             "date": f"{date_cmd[2]}/{date_cmd[1]}/{date_cmd[0]}",
             "totalprice": str(order.total_price),
+            "shippingcosts": str(order.shipping_costs),
             "products": []
         }
     }

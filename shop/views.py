@@ -53,7 +53,7 @@ def list_all_products(request):
             filter_form = FilterProductForm()
 
         if all_products != "error":
-            paginator = Paginator(all_products, 1)
+            paginator = Paginator(all_products, 3)
 
             try:
                 page_number = request.GET['page']

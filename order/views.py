@@ -24,7 +24,8 @@ def create_order(request):
 
         order = Order()
         order.reference = datetime_ref
-        order.total_price = cart.get_total_price()
+        order.total_price = cart.get_total_price()[1]
+        order.shipping_costs = cart.get_shipping_costs()
         order.note = data['note']
 
 
@@ -63,7 +64,7 @@ def create_order(request):
             payment_method_types=['card'],
             line_items=[{
                 'price_data': {
-                    'unit_amount_decimal': cart.get_total_price()*100,
+                    'unit_amount_decimal': cart.get_total_price()[1]*100,
                     'currency': 'eur',
                     'product': settings.STRIPE_PRODUCT,
                     },
@@ -103,6 +104,7 @@ def success_order(request):
     if response['status'] == 'succeeded':
         order.url_receipt = response['charges']['data'][0]['receipt_url']
         order.paid = True
+        order.status = 'En cours de préparation'
     else:
         order.paid = False
     order.save()
@@ -126,8 +128,12 @@ def success_order(request):
 
 def fail_order(request):
     ref_order = request.GET['ref']
+    order = get_object_or_404(Order, reference=ref_order)
+
+    order.status = 'Payement non abouti'
+    order.save()
 
     context = {
-        'order': get_object_or_404(Order, reference=ref_order)
+        'order': order
     }
     return render(request, 'order/orderfail.html', context)
