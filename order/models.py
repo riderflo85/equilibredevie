@@ -29,6 +29,7 @@ class Order(models.Model):
     url_receipt = models.CharField(max_length=300)
     shipping_costs = models.DecimalField(max_digits=10, decimal_places=2)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    subtotal_price = models.DecimalField(max_digits=10, decimal_places=2)
     note = models.TextField(blank=True)
     status = models.CharField(
         max_length=30,

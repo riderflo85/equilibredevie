@@ -22,10 +22,18 @@ def create_order(request):
         user = request.user
         user_customer = check_stripe_client(stripe, user, data['dep'])
 
+        # --------------------------------------------------------------------
+        # type: list() 
+        # [0] == price whitout shipping costs
+        # [1] == price with shipping costs
+        total_price = cart.get_total_price()
+        # --------------------------------------------------------------------
+
         order = Order()
         order.reference = datetime_ref
-        order.total_price = cart.get_total_price()[1]
+        order.total_price = total_price[1]
         order.shipping_costs = cart.get_shipping_costs()
+        order.subtotal_price = total_price[0]
         order.note = data['note']
 
 

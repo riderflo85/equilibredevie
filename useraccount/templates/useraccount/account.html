@@ -226,8 +226,8 @@
                                     <div class="col-md-5 ml-auto">
                                         <div class="cart-page-total pt-3">
                                             <ul>
-                                                <li>Sous total<span>{{ order.total_price }} €</span></li>
-                                                <li>Frais de port<span>0 €</span></li>
+                                                <li>Sous total<span>{{ order.subtotal_price }} €</span></li>
+                                                <li>Frais de port<span>{{ order.shipping_costs }} €</span></li>
                                                 <li>Total<span>{{ order.total_price }} €</span></li>
                                             </ul>
                                         </div>
