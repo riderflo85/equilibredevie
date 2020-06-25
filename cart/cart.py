@@ -1,5 +1,6 @@
 from decimal import Decimal
 from django.conf import settings
+from django.db.models import Q
 from shop.models import Product, ShippingCosts
 
 
@@ -15,6 +16,7 @@ class Cart(object):
             # save an empty cart in the session
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
+        self.weight = 0
 
     def __iter__(self):
         """
@@ -40,35 +42,47 @@ class Cart(object):
         """
         return sum(item['quantity'] for item in self.cart.values())
 
-    def _get_product_shipping_costs(self, product, quantity):
+    def _get_product_weight(self, product, quantity):
         """
-        Calculate the shipping costs on a product.
+        Get the total weight of the product.
         """
-        product_shipping_costs = 0
-        for costs in ShippingCosts.objects.all():
-            if costs.min_weight <= float(product.weight) and costs.max_weight >= float(product.weight):
-                product_shipping_costs = float(costs.price)
-        return product_shipping_costs * quantity
+        total_weight = product.weight * quantity
+        return total_weight
+
+    def _get_total_shipping_costs(self, weight):
+        """
+        Get the shipping costs of the cart.
+        """
+        costs = 0
+        try:
+            costs = ShippingCosts.objects.get(
+                Q(min_weight__lte=weight),
+                Q(max_weight__gte=weight)
+            ).price
+        except:
+            costs = 0
+
+        return costs
 
     def add(self, product, quantity=1, update_quantity=False):
         """
         Add a product to the cart or update its quantity.
         """
-        product_costs = self._get_product_shipping_costs(product, quantity)
-
+        total_weight = self._get_product_weight(product, quantity)
         product_id = str(product.id)
         if product_id not in self.cart:
             self.cart[product_id] = {
                 'quantity': 0,
                 'price': str(product.price),
+                'weight': 0,
                 'costs': 0
             }
         if update_quantity:
             self.cart[product_id]['quantity'] = quantity
-            self.cart[product_id]['costs'] = product_costs
+            self.cart[product_id]['weight'] = total_weight
         else:
             self.cart[product_id]['quantity'] += quantity
-            self.cart[product_id]['costs'] += product_costs
+            self.cart[product_id]['weight'] += total_weight
 
         self.save()
 
@@ -85,7 +99,7 @@ class Cart(object):
                 product = Product.objects.get(pk=int(id_product))
 
                 self.cart[id_product]['quantity'] = int(quantity_product)
-                self.cart[id_product]['costs'] = self._get_product_shipping_costs(
+                self.cart[id_product]['weight'] = self._get_product_weight(
                     product, int(quantity_product))
 
             self.save()
@@ -106,14 +120,30 @@ class Cart(object):
             del self.cart[product_id]
             self.save()
 
-    def get_shipping_costs(self):
-        shipping_costs = 0.00
+    def get_total_cart_weight(self):
+        """
+        Get the total weight of the cart.
+        """
+        total_weight = 0
         for item in self.cart.values():
-            shipping_costs += item['costs']
+            total_weight += item['weight']
+        
+        return total_weight
 
-        return Decimal(str(shipping_costs)+"0")
+    def get_shipping_costs(self):
+        """
+        Get the shipping costs of the cart.
+        """
+        total_weight = self.get_total_cart_weight()
+        shipping_costs = self._get_total_shipping_costs(total_weight)
+
+        return Decimal(str(shipping_costs))
 
     def get_total_price(self):
+        """
+        Get the total price with the shipping costs
+        and without the shipping costs.
+        """
         without_shipping_costs = sum(
             Decimal(item['price']) * item['quantity']
             for item in self.cart.values()
@@ -125,6 +155,3 @@ class Cart(object):
         # remove cart from session
         del self.session[settings.CART_SESSION_ID]
         self.save()
-
-
-

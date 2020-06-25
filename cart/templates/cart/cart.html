@@ -85,6 +85,7 @@
                                 <ul>
                                     <li>Sous total<span>{{ cart.get_total_price.0 }} €</span></li>
                                     <li>Frais de port<span>{{ cart.get_shipping_costs }} €</span></li>
+                                    <li>Poids total<span>{{ cart.get_total_cart_weight }} Kg</span></li>
                                     <li>Total<span>{{ cart.get_total_price.1 }} €</span></li>
                                 </ul>
                                 {% if cart|length > 0 %}
