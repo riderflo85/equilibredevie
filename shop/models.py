@@ -81,6 +81,14 @@ class Product(models.Model):
     weight = models.PositiveIntegerField(
         verbose_name="Poids en Kilos"
     )
+    has_a_declination = models.BooleanField(
+        verbose_name="Le produit À une déclinaison ?",
+        default=False
+    )
+    is_a_declination = models.BooleanField(
+        verbose_name="Le produit EST une déclinaison ?",
+        default=False
+    )
     available = models.BooleanField(
         default=True, verbose_name="Rendre publique"
     )
@@ -132,3 +140,18 @@ class ShippingCosts(models.Model):
         def __str__(self):
                 return f"De {self.min_weight} à {max_weight}, \
                     les frais de port sont de {self.price}"
+
+
+class ProductDeclination(models.Model):
+    original_product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name="FK_ProductDeclination_original_product",
+        verbose_name="Produit original"
+    )
+    declined_product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name="FK_ProductDeclination_declined_product",
+        verbose_name="Produit décliné"
+    )
