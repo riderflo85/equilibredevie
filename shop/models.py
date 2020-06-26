@@ -155,3 +155,7 @@ class ProductDeclination(models.Model):
         related_name="FK_ProductDeclination_declined_product",
         verbose_name="Produit décliné"
     )
+
+    class Meta:
+        verbose_name = "Déclinaison de produit"
+        verbose_name_plural = "Déclinaison de produits"
