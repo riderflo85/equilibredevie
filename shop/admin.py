@@ -10,12 +10,24 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'price', 'weight', 'category',
-                    'available', 'created', 'updated',
-                    'priority', 'has_a_declination', 'is_a_declination'
-                    ]
+    list_display = [
+        'name',
+        'slug',
+        'price',
+        'weight',
+        'size',
+        'dimension',
+        'color',
+        'category',
+        'available',
+        'created',
+        'updated',
+        'priority',
+        'has_a_declination',
+        'is_a_declination'
+    ]
     list_filter = ['category', 'available', 'created', 'updated', 'priority']
-    list_editable = ['price', 'available']
+    list_editable = ['price', 'weight']
     prepopulated_fields = {'slug': ('name',)}
 
 
@@ -26,4 +38,5 @@ class ShippingCostsAdmin(admin.ModelAdmin):
 
 @admin.register(ProductDeclination)
 class ProductDeclinationAdmin(admin.ModelAdmin):
-    list_display = ['original_product', 'declined_product']
+    list_display = ['original_product', 'declined_product',
+        'type_of_declination']
