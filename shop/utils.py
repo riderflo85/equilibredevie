@@ -1,4 +1,4 @@
-from .models import Product, Category
+from .models import Category
 
 
 def filter_products_by_user_choice(filter_form, products):

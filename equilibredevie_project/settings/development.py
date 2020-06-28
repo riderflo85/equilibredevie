@@ -9,7 +9,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-INSTALLED_APPS.append('django_extensions')
+new_apps = [
+    'django_extensions',
+    'debug_toolbar'
+]
+
+for app in new_apps:
+    INSTALLED_APPS.append(app)
+
+MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+
+INTERNAL_IPS = ['127.0.0.1']
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

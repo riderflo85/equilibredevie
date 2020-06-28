@@ -22,16 +22,14 @@ class Category(models.Model):
         return reverse('shop:product_list_by_category', args=[self.slug])
 
 
-PRIORITY = [
-    ('1', '*****'),
-    ('2', '****'),
-    ('3', '***'),
-    ('4', '**'),
-    ('5', '*')
-]
-
-
 class Product(models.Model):
+    PRIORITY = [
+        ('1', '*****'),
+        ('2', '****'),
+        ('3', '***'),
+        ('4', '**'),
+        ('5', '*')
+    ]
     category = models.ForeignKey(
         Category,
         related_name='products',
@@ -80,6 +78,18 @@ class Product(models.Model):
     )
     weight = models.PositiveIntegerField(
         verbose_name="Poids en Kilos"
+    )
+    size = models.CharField(
+        max_length=5,
+        verbose_name="Taille du produit (exemple: S, M, L, XL...)"
+    )
+    dimension = models.CharField(
+        max_length=50,
+        verbose_name="Dimension du produit (exemple: 110x200cm)"
+    )
+    color = models.CharField(
+        max_length=50,
+        verbose_name="Couleur du produit"
     )
     has_a_declination = models.BooleanField(
         verbose_name="Le produit À une déclinaison ?",
@@ -137,12 +147,18 @@ class ShippingCosts(models.Model):
     class Meta:
         verbose_name = "Frais de port"
 
-        def __str__(self):
-                return f"De {self.min_weight} à {max_weight}, \
-                    les frais de port sont de {self.price}"
+    def __str__(self):
+        return f"De {self.min_weight} à {max_weight}, \
+        les frais de port sont de {self.price}"
 
 
 class ProductDeclination(models.Model):
+    TYPE_OF_DECLINATION = [
+        ('weight', 'Poid'),
+        ('size', 'Taille'),
+        ('dimension', 'Dimension'),
+        ('color', 'Couleur'),
+    ]
     original_product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
@@ -154,6 +170,11 @@ class ProductDeclination(models.Model):
         on_delete=models.CASCADE,
         related_name="FK_ProductDeclination_declined_product",
         verbose_name="Produit décliné"
+    )
+    type_of_declination = models.CharField(
+        max_length=150,
+        choices=TYPE_OF_DECLINATION,
+        verbose_name="type de déclinaison (exemple: poid, couleur, taille...)"
     )
 
     class Meta:
