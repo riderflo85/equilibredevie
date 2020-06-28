@@ -81,14 +81,17 @@ class Product(models.Model):
     )
     size = models.CharField(
         max_length=5,
+        blank=True,
         verbose_name="Taille du produit (exemple: S, M, L, XL...)"
     )
     dimension = models.CharField(
         max_length=50,
+        blank=True,
         verbose_name="Dimension du produit (exemple: 110x200cm)"
     )
     color = models.CharField(
         max_length=50,
+        blank=True,
         verbose_name="Couleur du produit"
     )
     has_a_declination = models.BooleanField(
