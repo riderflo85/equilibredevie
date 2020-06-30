@@ -3,8 +3,9 @@ from django.core.paginator import Paginator
 from django.views.generic.list import ListView
 from cart.forms import CartAddProductForm
 from .forms import SearchProductForm, FilterProductForm
-from .models import Product, Category
-from .utils import filter_products_by_user_choice, filter_products_by_categories
+from .models import Product, Category, ProductDeclination
+from .utils import filter_products_by_user_choice, \
+filter_products_by_categories, get_product_declination
 
 
 def list_all_products(request):
@@ -32,17 +33,15 @@ def list_all_products(request):
         search_form = SearchProductForm()
 
         if 'filter_categ' in request.GET.keys():
-            print("test in filter categ")
             all_products = filter_products_by_categories(
                 request.GET['filter_categ']
             )
             context['category'] = request.GET['filter_categ']
 
         else:
-            all_products = Product.objects.all()
+            all_products = Product.objects.all().exclude(is_a_declination=True)
 
         if 'filter_choice' in request.GET.keys():
-            print('test in filter choice')
             data = {'filter_choice': request.GET['filter_choice']}
             filter_form = FilterProductForm(data)
             all_products = filter_products_by_user_choice(
@@ -86,6 +85,18 @@ def product_detail(request, id_item):
     context = {
         "item": product,
         "related_item": related_product,
-        "cart_product_form": CartAddProductForm()
     }
+
+    if product.has_a_declination:
+        declinations, declination_type = get_product_declination(product)
+        context['cart_product_form'] = CartAddProductForm(
+            declination=declinations,
+            declination_type=declination_type
+        )
+        context['declinations'] = True
+
+    else:
+        context['cart_product_form'] = CartAddProductForm()
+        context['declinations'] = False
+
     return render(request, 'shop/productdetail.html', context)

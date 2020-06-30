@@ -65,20 +65,16 @@
                         <span>{{ item.price }}€</span>
                     </div>
                     <p>{{ item.description }}</p>
-                    <div class="quick-view-select">
-                        <div class="select-option-part">
-                            <label>Poids*</label>
-                            <select class="select">
-                                <option value="">- Selectionner un poid -</option>
-                                <option value="">1 kg</option>
-                                <option value="">2 kg</option>
-                                <option value="">3 kg</option>
-                                <option value="">4 kg</option>
-                            </select>
-                        </div>
-                    </div>
                     <form action="{% url 'cart:cart_add' item.id %}" method="post">
                         {% csrf_token %}
+                        {% if declinations %}
+                            <div class="quick-view-select">
+                                <div class="select-option-part">
+                                    <label>{{ cart_product_form.declination.label }}</label>
+                                    {{ cart_product_form.declination }}
+                                </div>
+                            </div>
+                        {% endif %}
                         <div class="quickview-plus-minus">
                             <div class="cart-plus-minus">
                                 {{ cart_product_form.quantity }}

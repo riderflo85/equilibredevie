@@ -1,4 +1,5 @@
-from .models import Category
+from django.contrib.admin.utils import label_for_field
+from .models import Category, ProductDeclination
 
 
 def filter_products_by_user_choice(filter_form, products):
@@ -28,3 +29,30 @@ def filter_products_by_categories(filter_categ):
         return products
     else:
         return "error"
+
+def get_product_declination(product):
+    """
+    Get the all declination of the product.
+    """
+
+    declinations = ProductDeclination.objects.filter(original_product=product)
+    choice_declination = [('none', ('-- Sélectionnez une déclinaison --'))]
+    type_of_declination = ""
+
+    for declination in declinations:
+        choice_declination.append(
+            (
+                declination.declined_product.id,
+                getattr(declination.declined_product,
+                    declination.type_of_declination)
+            )
+        )
+        if type_of_declination == "":
+            type_of_declination = declination.type_of_declination
+    
+    type_of_declination = label_for_field(
+        type_of_declination,
+        product
+    )
+    
+    return choice_declination, type_of_declination

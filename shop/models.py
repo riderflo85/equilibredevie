@@ -117,6 +117,8 @@ class Product(models.Model):
         auto_now=True, verbose_name="Mis à jour le"
     )
 
+    # Ajouter field litre pour futur déclinaison
+
     class Meta:
         ordering = ('priority', 'name')
         verbose_name = "Produit"
