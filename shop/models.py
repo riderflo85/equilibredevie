@@ -94,6 +94,10 @@ class Product(models.Model):
         blank=True,
         verbose_name="Couleur du produit"
     )
+    liter_capacity = models.PositiveIntegerField(
+        blank=True,
+        verbose_name="Contenance en Litre"
+    )
     has_a_declination = models.BooleanField(
         verbose_name="Le produit À une déclinaison ?",
         default=False
@@ -117,7 +121,6 @@ class Product(models.Model):
         auto_now=True, verbose_name="Mis à jour le"
     )
 
-    # Ajouter field litre pour futur déclinaison
 
     class Meta:
         ordering = ('priority', 'name')
