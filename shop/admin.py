@@ -18,6 +18,7 @@ class ProductAdmin(admin.ModelAdmin):
         'size',
         'dimension',
         'color',
+        'liter_capacity',
         'category',
         'available',
         'created',
