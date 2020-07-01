@@ -36,9 +36,6 @@ def add_product_in_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     form = CartAddProductForm(request.POST)
 
-    print(request.POST)
-    print(form.is_valid())
-
     if form.is_valid():
         cd = form.cleaned_data
         cart.add(
@@ -50,8 +47,6 @@ def add_product_in_cart(request, product_id):
 
 @require_POST
 def update_cart(request):
-    print(request.POST['data'])
-
     data = request.POST['data'].split('|')
     data.pop(-1)
     
