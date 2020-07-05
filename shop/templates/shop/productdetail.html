@@ -131,7 +131,7 @@
                             <a href="{{ item.get_absolute_url }}">
                                 <img src="{{ item.image_shop.url }}" alt='item shop'>
                             </a>
-                            <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                            <form action="{% url 'cart:cart_add' item.id %}" method="post">
                                 {% csrf_token %}
                                 <div class="product-action">
                                     <div class="d-none">

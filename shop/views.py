@@ -77,10 +77,13 @@ def list_all_products(request):
 def product_detail(request, id_item):
     product = Product.objects.get(pk=id_item)
     related_product = Product.objects.filter(
-        category=product.category).exclude(pk=product.pk)
+        category=product.category
+    ).exclude(pk=product.pk).exclude(is_a_declination=True)
     
     if len(related_product) > 4:
         related_product = related_product[:4]
+    
+    print(related_product)
 
     context = {
         "item": product,

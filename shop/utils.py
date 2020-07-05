@@ -42,7 +42,7 @@ def get_product_declination(product):
     for declination in declinations:
         choice_declination.append(
             (
-                declination.declined_product.id,
+                str(declination.declined_product.id),
                 getattr(declination.declined_product,
                     declination.type_of_declination)
             )
