@@ -166,6 +166,7 @@ class ProductDeclination(models.Model):
         ('size', 'Taille'),
         ('dimension', 'Dimension'),
         ('color', 'Couleur'),
+        ('liter_capacity', 'Litre'),
     ]
     original_product = models.ForeignKey(
         Product,
