@@ -328,7 +328,7 @@
     
     /* testimonials active */
     $('.related-product-active').owlCarousel({
-        loop: true,
+        loop: false,
         nav: false,
         autoplay: false,
         autoplayTimeout: 5000,

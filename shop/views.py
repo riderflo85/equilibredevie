@@ -80,8 +80,8 @@ def product_detail(request, id_item):
         category=product.category
     ).exclude(pk=product.pk).exclude(is_a_declination=True)
     
-    if len(related_product) > 4:
-        related_product = related_product[:4]
+    if len(related_product) >= 3:
+        related_product = related_product[:3]
     
     print(related_product)
 

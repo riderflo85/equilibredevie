@@ -20,10 +20,10 @@
                 <div class="product-details-img-content">
                     <div class="product-details-tab mr-35 product-details-tab2">
                         <div class="product-details-small nav mr-10 product-details-2" role=tablist>
-                            <a class="active mb-10" href="#pro-details1" data-toggle="tab" role="tab" aria-selected="true">
-                                <img src="/static/main/img/product-details/s5.jpg" alt="">
+                            <a class="active mb-10" href="#pro-details1" data-toggle="tab" role="tab" aria-selected="true" style="height: 156px;">
+                                <img src="{{ item.image_detail_s.url }}" alt="">
                             </a>
-                            <a class="mb-10" href="#pro-details2" data-toggle="tab" role="tab" aria-selected="true">
+                            {% comment %} <a class="mb-10" href="#pro-details2" data-toggle="tab" role="tab" aria-selected="true">
                                 <img src="/static/main/img/product-details/s6.jpg" alt="">
                             </a>
                             <a class="mb-10" href="#pro-details3" data-toggle="tab" role="tab" aria-selected="true">
@@ -31,15 +31,15 @@
                             </a>
                             <a class="mb-10" href="#pro-details4" data-toggle="tab" role="tab" aria-selected="true">
                                 <img src="/static/main/img/product-details/s8.jpg" alt="">
-                            </a>
+                            </a> {% endcomment %}
                         </div>
                         <div class="product-details-large tab-content">
                             <div class="tab-pane active show fade" id="pro-details1" role="tabpanel">
                                 <div>
-                                    <img src="/static/main/img/product-details/l5-details-2.jpg" alt="">
+                                    <img src="{{ item.image_detail_m.url }}" alt="">
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="pro-details2" role="tabpanel">
+                            {% comment %} <div class="tab-pane fade" id="pro-details2" role="tabpanel">
                                 <div>
                                     <img src="/static/main/img/product-details/l6-details-2.jpg" alt="">
                                 </div>
@@ -53,7 +53,7 @@
                                 <div>
                                     <img src="/static/main/img/product-details/l8-details-2.jpg" alt="">
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                         </div>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
                                     <button type="submit" class="animate-top" title="Ajouter au panier">
                                         <i class="pe-7s-cart"></i>
                                     </button>
-                                    <button type="button" class="animate-right" title="Prévisualiser" data-toggle="modal" data-target="#modalProduct{{ product.id }}">
+                                    <button type="button" class="animate-right" title="Prévisualiser" data-toggle="modal" data-target="#modalProduct{{ item.id }}">
                                         <i class="pe-7s-look"></i>
                                     </button>
                                 </div>
@@ -169,25 +169,25 @@
                 <div class="qwick-view-left">
                     <div class="quick-view-learg-img">
                         <div class="quick-view-tab-content tab-content">
-                            <div class="tab-pane active show fade" id="modal1" role="tabpanel">
-                                <img src="{% static 'main/img/quick-view/l1.jpg' %}" alt="">
+                            <div class="tab-pane active show fade" id="modal1{{ item.pk }}" role="tabpanel">
+                                <img src="{{ item.image_home.url}}" alt="">
                             </div>
-                            <div class="tab-pane fade" id="modal2" role="tabpanel">
+                            <div class="tab-pane fade" id="modal2{{ item.pk }}" role="tabpanel">
                                 <img src="{% static 'main/img/quick-view/l2.jpg' %}" alt="">
                             </div>
-                            <div class="tab-pane fade" id="modal3" role="tabpanel">
+                            <div class="tab-pane fade" id="modal3{{ item.pk }}" role="tabpanel">
                                 <img src="{% static 'main/img/quick-view/l3.jpg' %}" alt="">
                             </div>
                         </div>
                     </div>
                     <div class="quick-view-list nav" role="tablist">
-                        <a class="active" href="#modal1" data-toggle="tab" role="tab">
-                            <img src="{% static 'main/img/quick-view/s1.jpg' %}" alt="">
+                        <a class="active" href="#modal1{{ item.pk }}" data-toggle="tab" role="tab">
+                            <img src="{{ item.image_detail_s.url }}" alt="">
                         </a>
-                        <a href="#modal2" data-toggle="tab" role="tab">
+                        <a href="#modal2{{ item.pk }}" data-toggle="tab" role="tab">
                             <img src="{% static 'main/img/quick-view/s2.jpg' %}" alt="">
                         </a>
-                        <a href="#modal3" data-toggle="tab" role="tab">
+                        <a href="#modal3{{ item.pk }}" data-toggle="tab" role="tab">
                             <img src="{% static 'main/img/quick-view/s3.jpg' %}" alt="">
                         </a>
                     </div>
