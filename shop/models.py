@@ -21,6 +21,9 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse('shop:product_list_by_category', args=[self.slug])
 
+    def get_all_products_without_declination(self):
+        return self.products.all().exclude(is_a_declination=True)
+
 
 class Product(models.Model):
     PRIORITY = [

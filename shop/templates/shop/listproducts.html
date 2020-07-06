@@ -37,7 +37,7 @@
                         <div class="sidebar-categories">
                             <ul>
                                 {% for categ in categories %}
-                                <li><a href="?filter_categ={{ categ.slug }}">{{ categ }} <span>{{ categ.products.all|length }}</span></a></li>
+                                <li><a href="?filter_categ={{ categ.slug }}">{{ categ }} <span>{{ categ.get_all_products_without_declination|length }}</span></a></li>
                                 {% endfor %}
                             </ul>
                         </div>
