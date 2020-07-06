@@ -1,5 +1,8 @@
-from django.contrib import admin
+from django.contrib import admin, messages
+from django.utils.translation import ngettext
 from .models import Order, OrderProductQuantity
+
+
 
 
 @admin.register(Order)
@@ -34,6 +37,28 @@ class OrderAdmin(admin.ModelAdmin):
         'created',
         'total_price'
     ]
+    actions = ['update_order_status_send', 'update_order_status_prepare']
+
+    def update_order_status_send(self, request, queryset):
+        updated = queryset.update(status='send')
+        self.message_user(request, ngettext(
+            '%d Le statu de la commande a été changée avec succès.',
+            '%d Le statu des commandes ont été changées avec succès.',
+            updated,
+        ) % updated, messages.SUCCESS)
+    
+    update_order_status_send.short_description = "Changer le statu en 'Expédié'."
+
+    def update_order_status_prepare(self, request, queryset):
+        updated = queryset.update(status='prepare')
+        self.message_user(request, ngettext(
+            '%d Le statu de la commande a été changée avec succès.',
+            '%d Le statu des commandes ont été changées avec succès.',
+            updated,
+        ) % updated, messages.SUCCESS)
+
+    update_order_status_prepare.short_description = "Changer le statu en \
+        'En cours de préparation'."
 
 @admin.register(OrderProductQuantity)
 class OrderProductQuantityAdmin(admin.ModelAdmin):
