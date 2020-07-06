@@ -6,6 +6,8 @@ $(document).ready(function () {
     console.log('test', categ.length);
     if (categ.length > 0) {
         inputCateg.attr('value', categ);
+    } else {
+        inputCateg.attr('disabled', true);
     }
 
     $(select[0]).attr('disabled', true);

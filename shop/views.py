@@ -10,6 +10,7 @@ filter_products_by_categories, get_product_declination
 
 def list_all_products(request):
     context = {}
+    all_products = None
 
     if request.method == 'POST':
         search_form = SearchProductForm(request.POST)
@@ -19,7 +20,8 @@ def list_all_products(request):
             try:
                 search_products = Product.objects.filter(
                     name__icontains=key_word
-                )
+                ).exclude(is_a_declination=True)
+                all_products = search_products
                 context['matched'] = True
                 context['object_list'] = search_products
 
@@ -51,23 +53,26 @@ def list_all_products(request):
         else:
             filter_form = FilterProductForm()
 
-        if all_products != "error":
-            paginator = Paginator(all_products, 3)
+    if all_products != "error" and len(all_products) > 0:
+        paginator = Paginator(all_products, 3)
 
-            try:
-                page_number = request.GET['page']
-            except:
-                page_number = 1
+        try:
+            page_number = request.GET['page']
+        except:
+            page_number = 1
 
-            page_obj = paginator.get_page(page_number)
+        page_obj = paginator.get_page(page_number)
 
-            context['object_list'] = all_products
-            context['page_obj'] = page_obj
-            context['number_page'] = range(paginator.num_pages)
-        else:
-            context['error'] = "Le filtre de produit n'est pas valide."
-    
-    context['filter_form'] = filter_form
+        context['object_list'] = all_products
+        context['page_obj'] = page_obj
+        context['number_page'] = range(paginator.num_pages)
+        try:
+            context['filter_form'] = filter_form
+        except UnboundLocalError:
+            context['filter_form'] = FilterProductForm()
+    else:
+        context['error'] = "Le filtre de produit n'est pas valide."
+
     context['search_form'] = search_form
     context['categories'] = Category.objects.all()
     context['cart_product_form'] = CartAddProductForm()

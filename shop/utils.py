@@ -7,6 +7,7 @@ def filter_products_by_user_choice(filter_form, products):
     Filter the all products in the database by the user choice.
     """
 
+    print('enter the filter_product_by_user_choice function')
     if filter_form.is_valid():
         user_choice = filter_form.cleaned_data['filter_choice']
         if user_choice != "none":
@@ -22,8 +23,9 @@ def filter_products_by_categories(filter_categ):
     Filter the all products in the database by the product categories.
     """
 
+    print('enter the filter_product_by_categories function')
     category = Category.objects.get(slug=filter_categ)
-    products = category.products.all()
+    products = category.products.all().exclude(is_a_declination=True)
 
     if len(products) > 0:
         return products
