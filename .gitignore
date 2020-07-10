@@ -5,5 +5,5 @@ main/migrations/00*
 shop/migrations/00*
 useraccount/migrations/00*
 order/migrations/00*
-payment/migrations/00*
+newsletter/migrations/00*
 cart/migrations/00*
