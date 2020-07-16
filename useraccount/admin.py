@@ -15,5 +15,6 @@ class UserAdmin(admin.ModelAdmin):
         'adress',
         'postal_code',
         'city',
+        'newsletter',
         'is_verified',
     ]
