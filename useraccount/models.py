@@ -40,6 +40,10 @@ class User(AbstractUser):
         null=False,
         verbose_name='Ville'
     )
+    newsletter = models.BooleanField(
+        default=False,
+        verbose_name='abonnement newsletter'
+    )
     is_verified = models.BooleanField(
         default=False,
         verbose_name='Compte vérifié'

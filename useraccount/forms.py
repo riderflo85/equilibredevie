@@ -43,6 +43,7 @@ class RegisterForm(forms.ModelForm):
             'adress',
             'postal_code',
             'city',
+            'newsletter',
         ]
         exclude = ['order']
 

@@ -2,6 +2,8 @@ $(document).ready(function () {
 
     let inputPwd = $("#id_password");
     let inputEmail = $("#id_email");
+    let newsletterBox = $("#newsletterBox");
+    let newsletterCheckBox = $("#id_newsletter");
     let pwd;
 
     /* Update the content form */
@@ -19,6 +21,15 @@ $(document).ready(function () {
     document.getElementById('id_password').type = "password";
     document.getElementById('id_phone_number').pattern = "^0+[0-9]{1}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}";
     document.getElementById('id_postal_code').pattern = "[0-9]{5}";
+
+    for (const label of $('label')) {
+        if (label.getAttribute('for') === 'id_newsletter') {
+            newsletterCheckBox.appendTo(newsletterBox);
+            newsletterCheckBox.addClass('mr-2');
+            $(label).appendTo(newsletterBox);
+            $(label).text("S'abonner à la newsletter pour être informé des futurs salons");
+        }
+    }
     /* ************************ */
 
     /* If error in the form */
@@ -58,7 +69,6 @@ $(document).ready(function () {
 
 
     $('#id_phone_number').on('keyup', function () {
-        console.log(this.value.length);
         if (this.value.length <= 9 || this.value.length >= 11) {
             this.classList.add('is-invalid');
         } else {
@@ -69,7 +79,6 @@ $(document).ready(function () {
     });
 
     $('#id_postal_code').on('keyup', function () {
-        console.log(this.value.length);
         if (this.value.length <= 4 || this.value.length >= 6) {
             this.classList.add('is-invalid');
         } else {

@@ -53,6 +53,7 @@ def register(request):
                     adress=form.cleaned_data['adress'],
                     postal_code=form.cleaned_data['postal_code'],
                     city=form.cleaned_data['city'],
+                    newsletter=form.cleaned_data['newsletter'],
                 )
                 user.save()
                 user.generate_activate_key()

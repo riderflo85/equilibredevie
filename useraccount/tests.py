@@ -33,7 +33,8 @@ class FormTestCase(TestCase):
             'phone_number': 1723456789,
             'adress': '134 Rue De Paris',
             'postal_code': 75000,
-            'city': 'Paris'
+            'city': 'Paris',
+            'newsletter': True
         }
 
         form = RegisterForm(data)
@@ -49,6 +50,7 @@ class FormTestCase(TestCase):
             adress=form.cleaned_data['adress'],
             postal_code=form.cleaned_data['postal_code'],
             city=form.cleaned_data['city'],
+            newsletter=form.cleaned_data['newsletter']
         )
         user.save()
         self.assertTrue(is_valid)
