@@ -98,6 +98,7 @@ class Product(models.Model):
         verbose_name="Couleur du produit"
     )
     liter_capacity = models.PositiveIntegerField(
+        default=0,
         blank=True,
         verbose_name="Contenance en Litre"
     )
@@ -159,7 +160,7 @@ class ShippingCosts(models.Model):
         verbose_name = "Frais de port"
 
     def __str__(self):
-        return f"De {self.min_weight} à {max_weight}, \
+        return f"De {self.min_weight} à {self.max_weight}, \
         les frais de port sont de {self.price}"
 
 
