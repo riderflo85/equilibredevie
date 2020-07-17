@@ -37,6 +37,30 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
+<div class="alert alert-success fade pos-alert" role="alert" id="alertSubscribe">
+    <strong>Votre abonnement à la newsletter à été activé avec succès !</strong>
+    <button type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="alert alert-danger fade pos-alert" role="alert" id="alertFailSubscribe">
+    <strong>Une erreur est survenu lors de l'abonnement à la newsletter.</strong> Merci de réessayer ultérieurement.
+    <button type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="alert alert-success fade pos-alert" role="alert" id="alertUnsubscribe">
+    <strong>Votre abonnement à la newsletter à été désactivé avec succès!</strong>
+    <button type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="alert alert-danger fade pos-alert" role="alert" id="alertFailUnsubscribe">
+    <strong>Une erreur est survenu lors du désabonnement à la newsletter.</strong> Merci de réessayer ultérieurement.
+    <button type="button" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
 <div class="alert alert-danger fade pos-alert" role="alert" id="alertErrorForm">
     <strong>Une erreur est survenu !</strong> Merci de vérifier le formulaire avant validation.
     <button type="button" class="close" aria-label="Close">
@@ -179,6 +203,11 @@
                         </div>
                         <div class="pos-btn d-flex">
                             <button type="button" class="btn-user-account btn-hover ml-2" id="changePwd">Valider <i class="fas fa-check"></i></button>
+                            {% if user.newsletter %}
+                            <button type="button" class="btn-user-account btn-hover ml-2" id="unsubscribeNewsletter">Se désincrire de la newsletter</button>
+                            {% else %}
+                            <button type="button" class="btn-user-account btn-hover ml-2" id="subscribeNewsletter">S'inscrire à la newsletter</button>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

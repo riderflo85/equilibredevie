@@ -4,7 +4,11 @@ $(document).ready(function () {
         'alertFailChangePwd',
         'alertChangeUserInfos',
         'alertFailChangeUserInfos',
-        'alertErrorForm'
+        'alertErrorForm',
+        'alertSubscribe',
+        'alertFailSubscribe',
+        'alertUnsubscribe',
+        'alertFailUnsubscribe'
     ]
 
     for (const alert of alerts) {
