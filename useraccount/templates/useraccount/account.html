@@ -201,13 +201,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="pos-btn d-flex">
-                            <button type="button" class="btn-user-account btn-hover ml-2" id="changePwd">Valider <i class="fas fa-check"></i></button>
+                        <div class="pos-btn-multiple d-flex">
                             {% if user.newsletter %}
-                            <button type="button" class="btn-user-account btn-hover ml-2" id="unsubscribeNewsletter">Se désincrire de la newsletter</button>
+                            <button type="button" class="btn-user-unsubscribe btn-hover ml-2" id="unsubscribeNewsletter">Se désincrire de la newsletter <i class="fas fa-envelope"></i></button>
                             {% else %}
-                            <button type="button" class="btn-user-account btn-hover ml-2" id="subscribeNewsletter">S'inscrire à la newsletter</button>
+                            <button type="button" class="btn-user-account btn-hover ml-2" id="subscribeNewsletter">S'inscrire à la newsletter <i class="fas fa-envelope-open-text"></i></button>
                             {% endif %}
+                            <button type="button" class="btn-user-account btn-hover ml-2" id="changePwd">Valider <i class="fas fa-check"></i></button>
                         </div>
                     </div>
                 </div>

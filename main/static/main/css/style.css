@@ -9846,6 +9846,11 @@ input.cart-plus-minus-box::-o-outer-spin-button {
     top: 4%;
     left: 25%;
 }
+.pos-btn-multiple {
+    position: relative;
+    top: 4%;
+    left: 18%;
+}
 .btn-user-account {
     background-color: #578a01;
     border: 0;
@@ -9864,6 +9869,26 @@ input.cart-plus-minus-box::-o-outer-spin-button {
     color: #fff;
 }
 .btn-hover.btn-user-account::before {
+    border-radius: 5px;
+}
+.btn-user-unsubscribe {
+    background-color: #ce1115;
+    border: 0;
+    border-radius: 5px;
+    color: #fffffe;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    padding: 16px 30px 16px;
+    text-transform: uppercase;
+    z-index: 99;
+}
+.btn-user-unsubscribe:hover {
+    cursor: pointer;
+    color: #fff;
+}
+.btn-hover.btn-user-unsubscribe::before {
     border-radius: 5px;
 }
 .size-edit-first {
