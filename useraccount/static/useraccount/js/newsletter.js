@@ -62,6 +62,7 @@ function unsubscribe () {
     });
 }
 
+// Ajouter une fonction qui actualise le bouton
 
 $(document).ready(function () {
     let btnSubscribeNewsletter = $('#subscribeNewsletter');

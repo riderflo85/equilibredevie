@@ -196,3 +196,23 @@ def reset_password(request):
 
 def success_reset_pwd(request):
     return render(request, 'useraccount/successresetpassword.html')
+
+def newsletter(request):
+    if request.method == 'POST':
+        data = request.POST
+        user = request.user
+
+        if data['state'] == 'subscribe':
+            user.newsletter = True
+            user.save()
+
+            return JsonResponse({'success': True})
+        
+        elif data['state'] == 'unsubscribe':
+            user.newsletter = False
+            user.save()
+
+            return JsonResponse({'success': True})
+    
+    else:
+        return redirect('useraccount:account')

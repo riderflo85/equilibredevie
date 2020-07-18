@@ -23,4 +23,5 @@ urlpatterns = [
         views.success_reset_pwd,
         name="success_reset_pwd"
     ),
+    path('newsletter/', views.newsletter, name="newsletter"),
 ]
