@@ -10,6 +10,22 @@ $.ajaxSetup({
 });
 // ****************************************************************************************
 
+function actualiseNewsletterButton (state) {
+    let unsubscribeBtn = `<button type="button" class="btn-user-unsubscribe btn-hover ml-2" id="unsubscribeNewsletter">Se désincrire de la newsletter <i class="fas fa-envelope"></i></button>`;
+
+    let subscribeBtn = `<button type="button" class="btn-user-account btn-hover ml-2" id="subscribeNewsletter">S'inscrire à la newsletter <i class="fas fa-envelope-open-text"></i></button>`;
+
+    let allButtons = $('#boxButton').children();
+
+    $(allButtons[0]).remove();
+
+    if (state['subscribe']) {
+        $('#changePwd').before(unsubscribeBtn);
+    } else {
+        $('#changePwd').before(subscribeBtn);
+    }
+}
+
 function subscribe () {
     let alerts = [
         $('#alertSubscribe'),
@@ -25,6 +41,7 @@ function subscribe () {
             if (res['success']) {
                 // display an success alert. (success alert for subscribe is done.)
                 alerts[0].addClass('show');
+                actualiseNewsletterButton({'subscribe': true });
             } else {
                 // display an error alert
                 alerts[1].addClass('show');
@@ -51,6 +68,7 @@ function unsubscribe () {
             if (res['success']) {
                 // display an success alert. (success alert for unsubscribe is done.)
                 alerts[0].addClass('show');
+                actualiseNewsletterButton({'subscribe': false});
             } else {
                 // display an error alert
                 alerts[1].addClass('show');
@@ -62,7 +80,6 @@ function unsubscribe () {
     });
 }
 
-// Ajouter une fonction qui actualise le bouton
 
 $(document).ready(function () {
     let btnSubscribeNewsletter = $('#subscribeNewsletter');
@@ -70,14 +87,12 @@ $(document).ready(function () {
 
     if (btnSubscribeNewsletter.length > 0) {
         btnSubscribeNewsletter.on('click', function () {
-            // execute subscribe function
             subscribe();
         });
     }
 
     if (btnUnsubscribeNewsletter.length > 0) {
         btnUnsubscribeNewsletter.on('click', function () {
-            // execute unsubscribe function
             unsubscribe();
         });
     }
